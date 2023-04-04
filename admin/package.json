@@ -1,5 +1,5 @@
 {
-  "name": "lelo-admin",
+  "name": "lelo-web-admin",
   "private": true,
   "description": "Admin system to manage lelo jewelry storefront",
   "version": "0.1.0",
