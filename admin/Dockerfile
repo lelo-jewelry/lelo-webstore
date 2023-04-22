@@ -1,4 +1,11 @@
-FROM nginx:alpine
-WORKDIR .
+FROM node:alpine as build-step
+WORKDIR /usr/src/app
+COPY package.json package-lock.json ./
+RUN npm install
 RUN npm run build
-COPY public /usr/share/nginx/html
+
+# Nginx
+FROM nginx:alpine
+COPY --from=build-step /usr/src/app/public /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
