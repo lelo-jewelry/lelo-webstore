@@ -1,69 +1,69 @@
-import useToggleState from "@lib/hooks/use-toggle-state"
-import { createContext, useContext, useEffect, useState } from "react"
+import useToggleState from '@lib/hooks/use-toggle-state';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface CartDropdownContext {
-  state: boolean
-  open: () => void
-  timedOpen: () => void
-  close: () => void
+    state: boolean;
+    open: () => void;
+    timedOpen: () => void;
+    close: () => void;
 }
 
 export const CartDropdownContext = createContext<CartDropdownContext | null>(
-  null
-)
+    null
+);
 
 export const CartDropdownProvider = ({
-  children,
+    children
 }: {
-  children: React.ReactNode
+    children: React.ReactNode;
 }) => {
-  const { state, close, open } = useToggleState()
-  const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
-    undefined
-  )
+    const { state, close, open } = useToggleState();
+    const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
+        undefined
+    );
 
-  const timedOpen = () => {
-    open()
+    const timedOpen = () => {
+        open();
 
-    const timer = setTimeout(close, 5000)
+        const timer = setTimeout(close, 5000);
 
-    setActiveTimer(timer)
-  }
+        setActiveTimer(timer);
+    };
 
-  const openAndCancel = () => {
-    if (activeTimer) {
-      clearTimeout(activeTimer)
-    }
+    const openAndCancel = () => {
+        if (activeTimer) {
+            clearTimeout(activeTimer);
+        }
 
-    open()
-  }
+        open();
+    };
 
-  // Clean up the timer when the component unmounts
-  useEffect(() => {
-    return () => {
-      if (activeTimer) {
-        clearTimeout(activeTimer)
-      }
-    }
-  }, [activeTimer])
+    // Clean up the timer when the component unmounts
+    useEffect(() => {
+        return () => {
+            if (activeTimer) {
+                clearTimeout(activeTimer);
+            }
+        };
+    }, [activeTimer]);
 
-  return (
-    <CartDropdownContext.Provider
-      value={{ state, close, open: openAndCancel, timedOpen }}
-    >
-      {children}
-    </CartDropdownContext.Provider>
-  )
-}
+    return (
+        <CartDropdownContext.Provider
+            value={{ state, close, open: openAndCancel, timedOpen }}
+        >
+            {children}
+        </CartDropdownContext.Provider>
+    );
+};
 
 export const useCartDropdown = () => {
-  const context = useContext(CartDropdownContext)
+    const context = useContext(CartDropdownContext);
 
-  if (context === null) {
-    throw new Error(
-      "useCartDropdown must be used within a CartDropdownProvider"
-    )
-  }
+    if (context === null) {
+        throw new Error(
+            'useCartDropdown must be used within a CartDropdownProvider'
+        );
+    }
 
-  return context
-}
+    return context;
+};
