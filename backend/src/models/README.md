@@ -9,18 +9,18 @@ You may define custom models (entities) that will be registered on the global co
 ```ts
 // src/models/post.ts
 
-import { BeforeInsert, Column, Entity, PrimaryColumn } from "typeorm";
-import { BaseEntity} from "@medusajs/medusa";
-import { generateEntityId } from "@medusajs/medusa/dist/utils"
+import { BeforeInsert, Column, Entity, PrimaryColumn } from 'typeorm';
+import { BaseEntity} from '@medusajs/medusa';
+import { generateEntityId } from '@medusajs/medusa/dist/utils';
 
 @Entity()
 export class Post extends BaseEntity {
-  @Column({type: 'varchar'})
+  @Column({type: 'varchar'});
   title: string | null;
 
   @BeforeInsert()
   private beforeInsert(): void {
-    this.id = generateEntityId(this.id, "post")
+    this.id = generateEntityId(this.id, 'post');
   }
 }
 ```
@@ -35,9 +35,8 @@ Entities data can be easily accessed and modified using [TypeORM Repositories](h
 ```ts
 // src/repositories/post.ts
 
-import { EntityRepository, Repository } from "typeorm"
-
-import { Post } from "../models/post"
+import { EntityRepository, Repository } from 'typeorm';
+import { Post } from '../models/post';
 
 @EntityRepository(Post)
 export class PostRepository extends Repository<Post> { }

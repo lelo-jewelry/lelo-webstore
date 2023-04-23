@@ -4,6 +4,7 @@
   "description": "lelo webstore backend based on medusajs",
   "scripts": {
     "seed": "medusa seed -f ./data/seed.json",
+    "migrate": "medusa migrations run",
     "build": "babel src -d dist --extensions \".ts,.js\"",
     "start": "medusa develop"
   },
