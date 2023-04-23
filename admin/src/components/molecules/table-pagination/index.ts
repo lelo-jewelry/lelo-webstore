@@ -1,1 +1,1 @@
-export { TablePagination as default } from "./table-pagination"
+export { TablePagination as default } from './table-pagination';

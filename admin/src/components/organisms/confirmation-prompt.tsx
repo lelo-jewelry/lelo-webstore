@@ -1,71 +1,73 @@
-import React, { useState } from "react"
+import React, { useState } from 'react';
 
-import Button from "../fundamentals/button"
-import Modal from "../molecules/modal"
+import Button from '../fundamentals/button';
+import Modal from '../molecules/modal';
 
 type ConfirmationPromptProps = {
-  heading: string
-  text: string
-  cancelText: string
-  confirmText: string
-  handleClose: () => void
-  onConfirm: () => Promise<void>
-}
+    heading: string;
+    text: string;
+    cancelText: string;
+    confirmText: string;
+    handleClose: () => void;
+    onConfirm: () => Promise<void>;
+};
 
 const ConfirmationPrompt: React.FC<ConfirmationPromptProps> = ({
-  heading,
-  text,
-  cancelText,
-  confirmText,
-  handleClose,
-  onConfirm,
+    heading,
+    text,
+    cancelText,
+    confirmText,
+    handleClose,
+    onConfirm
 }) => {
-  const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    setIsLoading(true)
-    onConfirm().finally(() => {
-      setIsLoading(false)
-      handleClose()
-    })
-  }
+        setIsLoading(true);
+        onConfirm().finally(() => {
+            setIsLoading(false);
+            handleClose();
+        });
+    };
 
-  return (
-    <Modal isLargeModal={false} handleClose={handleClose}>
-      <Modal.Body>
-        <Modal.Content>
-          <div className="flex flex-col">
-            <span className="inter-large-semibold">{heading}</span>
-            <span className="inter-base-regular mt-1 text-grey-50">{text}</span>
-          </div>
-        </Modal.Content>
-        <Modal.Footer>
-          <div className="flex h-8 w-full justify-end">
-            <Button
-              variant="ghost"
-              className="mr-2 w-24 justify-center text-small"
-              size="small"
-              onClick={handleClose}
-            >
-              {cancelText}
-            </Button>
-            <Button
-              loading={isLoading}
-              size="small"
-              className="w-24 justify-center text-small"
-              variant="primary"
-              onClick={handleSubmit}
-              disabled={isLoading}
-            >
-              {confirmText}
-            </Button>
-          </div>
-        </Modal.Footer>
-      </Modal.Body>
-    </Modal>
-  )
-}
+    return (
+        <Modal isLargeModal={false} handleClose={handleClose}>
+            <Modal.Body>
+                <Modal.Content>
+                    <div className="flex flex-col">
+                        <span className="inter-large-semibold">{heading}</span>
+                        <span className="inter-base-regular mt-1 text-grey-50">
+                            {text}
+                        </span>
+                    </div>
+                </Modal.Content>
+                <Modal.Footer>
+                    <div className="flex h-8 w-full justify-end">
+                        <Button
+                            variant="ghost"
+                            className="mr-2 w-24 justify-center text-small"
+                            size="small"
+                            onClick={handleClose}
+                        >
+                            {cancelText}
+                        </Button>
+                        <Button
+                            loading={isLoading}
+                            size="small"
+                            className="w-24 justify-center text-small"
+                            variant="primary"
+                            onClick={handleSubmit}
+                            disabled={isLoading}
+                        >
+                            {confirmText}
+                        </Button>
+                    </div>
+                </Modal.Footer>
+            </Modal.Body>
+        </Modal>
+    );
+};
 
-export default ConfirmationPrompt
+export default ConfirmationPrompt;

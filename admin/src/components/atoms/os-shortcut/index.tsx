@@ -1,50 +1,50 @@
-import React from "react"
+import React from 'react';
 
 type OSShortcutProps = {
-  winModifiers: string | string[]
-  macModifiers: string | string[]
-  keys: string[] | string
-}
+    winModifiers: string | string[];
+    macModifiers: string | string[];
+    keys: string[] | string;
+};
 
 const OSShortcut = ({ winModifiers, macModifiers, keys }: OSShortcutProps) => {
-  const isMac =
-    typeof window !== "undefined" &&
-    navigator?.platform?.toUpperCase().indexOf("MAC") >= 0
-      ? true
-      : false
+    const isMac =
+        typeof window !== 'undefined' &&
+        navigator?.platform?.toUpperCase().indexOf('MAC') >= 0
+            ? true
+            : false;
 
-  let modifiers: string
+    let modifiers: string;
 
-  if (isMac) {
-    if (Array.isArray(macModifiers)) {
-      modifiers = macModifiers.join("")
+    if (isMac) {
+        if (Array.isArray(macModifiers)) {
+            modifiers = macModifiers.join('');
+        } else {
+            modifiers = macModifiers;
+        }
     } else {
-      modifiers = macModifiers
+        if (Array.isArray(winModifiers)) {
+            modifiers = winModifiers.join(' + ');
+        } else {
+            modifiers = winModifiers;
+        }
     }
-  } else {
-    if (Array.isArray(winModifiers)) {
-      modifiers = winModifiers.join(" + ")
+
+    let input: string;
+
+    if (Array.isArray(keys)) {
+        input = keys.join(' + ');
     } else {
-      modifiers = winModifiers
+        input = keys;
     }
-  }
 
-  let input: string
+    return (
+        <div className="flex items-center text-grey-40">
+            <p className="inter-base-semibold m-0">
+                <span className="inter-base-semibold">{modifiers} </span>
+                {input}
+            </p>
+        </div>
+    );
+};
 
-  if (Array.isArray(keys)) {
-    input = keys.join(" + ")
-  } else {
-    input = keys
-  }
-
-  return (
-    <div className="flex items-center text-grey-40">
-      <p className="inter-base-semibold m-0">
-        <span className="inter-base-semibold">{modifiers} </span>
-        {input}
-      </p>
-    </div>
-  )
-}
-
-export default OSShortcut
+export default OSShortcut;

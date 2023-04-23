@@ -1,17 +1,17 @@
-import JSONView from "../../molecules/json-view"
+import JSONView from '../../molecules/json-view';
 
-import BodyCard from "../body-card"
+import BodyCard from '../body-card';
 
 type RawJSONProps = {
-  /**
-   * JSON data to render
-   */
-  data?: object
-  /**
-   * Body card title.
-   */
-  title: string
-}
+    /**
+     * JSON data to render
+     */
+    data?: object;
+    /**
+     * Body card title.
+     */
+    title: string;
+};
 
 /**
  * Renders a (collapsed) JSON tree section.
@@ -20,19 +20,19 @@ type RawJSONProps = {
  * @return {Object} - React element
  */
 function RawJSON(props: RawJSONProps) {
-  const { title, data } = props
+    const { title, data } = props;
 
-  if (!data) {
-    return null
-  }
+    if (!data) {
+        return null;
+    }
 
-  return (
-    <BodyCard className={"mb-4 h-auto min-h-0 w-full"} title={title}>
-      <div className="mt-4 flex flex-grow items-center">
-        <JSONView data={data} />
-      </div>
-    </BodyCard>
-  )
+    return (
+        <BodyCard className={'mb-4 h-auto min-h-0 w-full'} title={title}>
+            <div className="mt-4 flex flex-grow items-center">
+                <JSONView data={data} />
+            </div>
+        </BodyCard>
+    );
 }
 
-export default RawJSON
+export default RawJSON;

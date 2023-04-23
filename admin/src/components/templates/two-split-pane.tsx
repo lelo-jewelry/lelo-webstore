@@ -1,54 +1,54 @@
-import clsx from "clsx"
-import React, { Children } from "react"
-import { useComputedHeight } from "../../hooks/use-computed-height"
+import clsx from 'clsx';
+import React, { Children } from 'react';
+import { useComputedHeight } from '../../hooks/use-computed-height';
 
 type TwoSplitPaneProps = {
-  className?: string
-  threeCols?: boolean
-  children?: React.ReactNode
-}
+    className?: string;
+    threeCols?: boolean;
+    children?: React.ReactNode;
+};
 
 const TwoSplitPane: React.FC<TwoSplitPaneProps> = ({
-  threeCols,
-  className,
-  children,
+    threeCols,
+    className,
+    children
 }) => {
-  const childrenCount = Children.count(children)
-  const { ref, height } = useComputedHeight(32)
+    const childrenCount = Children.count(children);
+    const { ref, height } = useComputedHeight(32);
 
-  const heightClass = height
-    ? {
-        gridTemplateRows: `${height}px`,
-      }
-    : undefined
+    const heightClass = height
+        ? {
+              gridTemplateRows: `${height}px`
+          }
+        : undefined;
 
-  if (childrenCount > 2) {
-    throw new Error("TwoSplitPane can only have two or less children")
-  }
+    if (childrenCount > 2) {
+        throw new Error('TwoSplitPane can only have two or less children');
+    }
 
-  return (
-    <div
-      className={clsx("grid grid-cols-1 gap-xsmall", className, {
-        "medium:grid-cols-2": !threeCols,
-        "medium:grid-cols-3": threeCols,
-      })}
-      style={heightClass}
-      ref={ref}
-    >
-      {Children.map(children, (child, i) => {
-        return (
-          <div
-            className={clsx("h-full w-full", {
-              "col-span-2": threeCols && i === 1,
+    return (
+        <div
+            className={clsx('grid grid-cols-1 gap-xsmall', className, {
+                'medium:grid-cols-2': !threeCols,
+                'medium:grid-cols-3': threeCols
             })}
-            key={i}
-          >
-            {child}
-          </div>
-        )
-      })}
-    </div>
-  )
-}
+            style={heightClass}
+            ref={ref}
+        >
+            {Children.map(children, (child, i) => {
+                return (
+                    <div
+                        className={clsx('h-full w-full', {
+                            'col-span-2': threeCols && i === 1
+                        })}
+                        key={i}
+                    >
+                        {child}
+                    </div>
+                );
+            })}
+        </div>
+    );
+};
 
-export default TwoSplitPane
+export default TwoSplitPane;

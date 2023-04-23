@@ -1,27 +1,27 @@
-import data from "./fixtures.json"
+import data from './fixtures.json';
 
-const resources = data["resources"]
+const resources = data['resources'];
 
-export type Resources = typeof resources
+export type Resources = typeof resources;
 
 type ResourcesWithKey<Entity extends string, T> = {
-  [K in keyof T]: { [_ in Entity]: K } & T[K]
-}
+    [K in keyof T]: { [_ in Entity]: K } & T[K];
+};
 
-type KeyedResources = ResourcesWithKey<"entity", Resources>
+type KeyedResources = ResourcesWithKey<'entity', Resources>;
 
 export const fixtures = {
-  get<Entity extends keyof Resources>(
-    entity: Entity
-  ): Omit<KeyedResources[Entity], "entity"> {
-    return resources[entity as string]
-  },
-  list<Entity extends keyof Resources>(
-    entity: Entity,
-    number = 2
-  ): Omit<KeyedResources[Entity], "entity">[] {
-    return Array(number)
-      .fill(null)
-      .map((_) => fixtures.get(entity))
-  },
-} as const
+    get<Entity extends keyof Resources>(
+        entity: Entity
+    ): Omit<KeyedResources[Entity], 'entity'> {
+        return resources[entity as string];
+    },
+    list<Entity extends keyof Resources>(
+        entity: Entity,
+        number = 2
+    ): Omit<KeyedResources[Entity], 'entity'>[] {
+        return Array(number)
+            .fill(null)
+            .map((_) => fixtures.get(entity));
+    }
+} as const;

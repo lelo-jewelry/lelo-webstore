@@ -1,248 +1,254 @@
-import { Customer } from "@medusajs/medusa"
-import { useAdminCustomerGroups, useAdminCustomers } from "medusa-react"
-import React, { useEffect, useState } from "react"
+import { Customer } from '@medusajs/medusa';
+import { useAdminCustomerGroups, useAdminCustomers } from 'medusa-react';
+import React, { useEffect, useState } from 'react';
 import {
-  HeaderGroup,
-  Row,
-  usePagination,
-  useRowSelect,
-  useTable,
-} from "react-table"
-import useQueryFilters from "../../../hooks/use-query-filters"
-import Button from "../../fundamentals/button"
-import Modal from "../../molecules/modal"
-import Table from "../../molecules/table"
-import TableContainer from "../../organisms/table-container"
-import { CUSTOMER_GROUPS_CUSTOMERS_TABLE_COLUMNS } from "./config"
+    HeaderGroup,
+    Row,
+    usePagination,
+    useRowSelect,
+    useTable
+} from 'react-table';
+import useQueryFilters from '../../../hooks/use-query-filters';
+import Button from '../../fundamentals/button';
+import Modal from '../../molecules/modal';
+import Table from '../../molecules/table';
+import TableContainer from '../../organisms/table-container';
+import { CUSTOMER_GROUPS_CUSTOMERS_TABLE_COLUMNS } from './config';
 
 /**
  * Default filtering config for querying customers endpoint.
  */
 const defaultQueryProps = {
-  additionalFilters: { expand: "groups" },
-  limit: 15,
-}
+    additionalFilters: { expand: 'groups' },
+    limit: 15
+};
 
-type EditCustomersTableHeaderRowProps = { headerGroup: HeaderGroup<Customer> }
+type EditCustomersTableHeaderRowProps = { headerGroup: HeaderGroup<Customer> };
 
 /*
  * Edit customers table header row.
  */
 function EditCustomersTableHeaderRow(props: EditCustomersTableHeaderRowProps) {
-  const { headerGroup } = props
+    const { headerGroup } = props;
 
-  return (
-    <Table.HeadRow {...headerGroup.getHeaderGroupProps()}>
-      {headerGroup.headers.map((col, index) => (
-        <Table.HeadCell className="w-[100px]" {...col.getHeaderProps()}>
-          {col.render("Header")}
-        </Table.HeadCell>
-      ))}
-    </Table.HeadRow>
-  )
+    return (
+        <Table.HeadRow {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((col, index) => (
+                <Table.HeadCell className="w-[100px]" {...col.getHeaderProps()}>
+                    {col.render('Header')}
+                </Table.HeadCell>
+            ))}
+        </Table.HeadRow>
+    );
 }
 
-type EditCustomersTableRowProps = { row: Row<Customer> }
+type EditCustomersTableRowProps = { row: Row<Customer> };
 
 /*
  * Edit customers table row.
  */
 function EditCustomersTableRow(props: EditCustomersTableRowProps) {
-  return (
-    <Table.Row
-      color={"inherit"}
-      linkTo={`/a/customers/${props.row.original.id}`}
-      {...props.row.getRowProps()}
-    >
-      {props.row.cells.map((cell, index) => (
-        <Table.Cell {...cell.getCellProps()}>
-          {cell.render("Cell", { index })}
-        </Table.Cell>
-      ))}
-    </Table.Row>
-  )
+    return (
+        <Table.Row
+            color={'inherit'}
+            linkTo={`/a/customers/${props.row.original.id}`}
+            {...props.row.getRowProps()}
+        >
+            {props.row.cells.map((cell, index) => (
+                <Table.Cell {...cell.getCellProps()}>
+                    {cell.render('Cell', { index })}
+                </Table.Cell>
+            ))}
+        </Table.Row>
+    );
 }
 
 type EditCustomersTableProps = {
-  onClose: () => void
-  handleSubmit: () => void
-  selectedCustomerIds: string[]
-  setSelectedCustomerIds: (customerIds: string[]) => void
-}
+    onClose: () => void;
+    handleSubmit: () => void;
+    selectedCustomerIds: string[];
+    setSelectedCustomerIds: (customerIds: string[]) => void;
+};
 
 /*
  * Container for the "edit customers" table.
  */
 function EditCustomersTable(props: EditCustomersTableProps) {
-  const { setSelectedCustomerIds, selectedCustomerIds, handleSubmit, onClose } =
-    props
+    const {
+        setSelectedCustomerIds,
+        selectedCustomerIds,
+        handleSubmit,
+        onClose
+    } = props;
 
-  const { paginate, setQuery, setFilters, filters, queryObject } =
-    useQueryFilters(defaultQueryProps)
+    const { paginate, setQuery, setFilters, filters, queryObject } =
+        useQueryFilters(defaultQueryProps);
 
-  const [numPages, setNumPages] = useState(0)
-  const [activeGroupId, setActiveGroupId] = useState()
+    const [numPages, setNumPages] = useState(0);
+    const [activeGroupId, setActiveGroupId] = useState();
 
-  const { customer_groups } = useAdminCustomerGroups({ expand: "customers" })
-  const {
-    customers = [],
-    count = 0,
-    isLoading,
-  } = useAdminCustomers({
-    ...queryObject,
-    groups: activeGroupId ? [activeGroupId] : null,
-  })
+    const { customer_groups } = useAdminCustomerGroups({ expand: 'customers' });
+    const {
+        customers = [],
+        count = 0,
+        isLoading
+    } = useAdminCustomers({
+        ...queryObject,
+        groups: activeGroupId ? [activeGroupId] : null
+    });
 
-  useEffect(() => {
-    if (typeof count !== "undefined") {
-      const controlledPageCount = Math.ceil(count / queryObject.limit)
-      setNumPages(controlledPageCount)
-    }
-  }, [count])
+    useEffect(() => {
+        if (typeof count !== 'undefined') {
+            const controlledPageCount = Math.ceil(count / queryObject.limit);
+            setNumPages(controlledPageCount);
+        }
+    }, [count]);
 
-  const tableConfig = {
-    columns: CUSTOMER_GROUPS_CUSTOMERS_TABLE_COLUMNS,
-    data: customers,
-    initialState: {
-      pageSize: queryObject.limit,
-      pageIndex: queryObject.offset / queryObject.limit,
-      selectedRowIds: selectedCustomerIds.reduce((prev, id) => {
-        prev[id] = true
-        return prev
-      }, {}),
-    },
-    pageCount: numPages,
-    autoResetSelectedRows: false,
-    manualPagination: true,
-    autoResetPage: false,
-    getRowId: (row) => row.id,
-  }
-
-  const table = useTable(tableConfig, usePagination, useRowSelect)
-
-  useEffect(() => {
-    setSelectedCustomerIds(Object.keys(table.state.selectedRowIds))
-  }, [table.state.selectedRowIds])
-
-  useEffect(() => {
-    setFilters("offset", 0)
-    table.gotoPage(0)
-  }, [activeGroupId])
-
-  const filteringOptions = [
-    {
-      title: "Groups",
-      options: [
-        {
-          title: "All",
-          onClick: () => setActiveGroupId(null),
+    const tableConfig = {
+        columns: CUSTOMER_GROUPS_CUSTOMERS_TABLE_COLUMNS,
+        data: customers,
+        initialState: {
+            pageSize: queryObject.limit,
+            pageIndex: queryObject.offset / queryObject.limit,
+            selectedRowIds: selectedCustomerIds.reduce((prev, id) => {
+                prev[id] = true;
+                return prev;
+            }, {})
         },
-        ...(customer_groups || []).map((g) => ({
-          title: g.name,
-          count: g.customers.length,
-          onClick: () => setActiveGroupId(g.id),
-        })),
-      ],
-    },
-  ]
+        pageCount: numPages,
+        autoResetSelectedRows: false,
+        manualPagination: true,
+        autoResetPage: false,
+        getRowId: (row) => row.id
+    };
 
-  const handleNext = () => {
-    if (!table.canNextPage) {
-      return
-    }
+    const table = useTable(tableConfig, usePagination, useRowSelect);
 
-    paginate(1)
-    table.nextPage()
-  }
+    useEffect(() => {
+        setSelectedCustomerIds(Object.keys(table.state.selectedRowIds));
+    }, [table.state.selectedRowIds]);
 
-  const handlePrev = () => {
-    if (!table.canPreviousPage) {
-      return
-    }
+    useEffect(() => {
+        setFilters('offset', 0);
+        table.gotoPage(0);
+    }, [activeGroupId]);
 
-    paginate(-1)
-    table.previousPage()
-  }
+    const filteringOptions = [
+        {
+            title: 'Groups',
+            options: [
+                {
+                    title: 'All',
+                    onClick: () => setActiveGroupId(null)
+                },
+                ...(customer_groups || []).map((g) => ({
+                    title: g.name,
+                    count: g.customers.length,
+                    onClick: () => setActiveGroupId(g.id)
+                }))
+            ]
+        }
+    ];
 
-  const handleSearch = (text: string) => {
-    setQuery(text)
+    const handleNext = () => {
+        if (!table.canNextPage) {
+            return;
+        }
 
-    if (text) {
-      table.gotoPage(0)
-    }
-  }
+        paginate(1);
+        table.nextPage();
+    };
 
-  return (
-    <Modal handleClose={onClose}>
-      <Modal.Body>
-        <Modal.Header handleClose={onClose}>
-          <h3 className="inter-xlarge-semibold">Edit Customers</h3>
-        </Modal.Header>
+    const handlePrev = () => {
+        if (!table.canPreviousPage) {
+            return;
+        }
 
-        <Modal.Content>
-          <TableContainer
-            isLoading={isLoading}
-            hasPagination
-            numberOfRows={queryObject.limit}
-            pagingState={{
-              count: count!,
-              offset: queryObject.offset,
-              pageSize: queryObject.offset + table.rows.length,
-              title: "Customers",
-              currentPage: table.state.pageIndex + 1,
-              pageCount: table.pageCount,
-              nextPage: handleNext,
-              prevPage: handlePrev,
-              hasNext: table.canNextPage,
-              hasPrev: table.canPreviousPage,
-            }}
-          >
-            <Table
-              filteringOptions={filteringOptions}
-              enableSearch
-              handleSearch={handleSearch}
-              searchValue={queryObject.q}
-              {...table.getTableProps()}
-            >
-              <Table.Head>
-                {table.headerGroups?.map((headerGroup) => (
-                  <EditCustomersTableHeaderRow headerGroup={headerGroup} />
-                ))}
-              </Table.Head>
+        paginate(-1);
+        table.previousPage();
+    };
 
-              <Table.Body {...table.getTableBodyProps()}>
-                {table.rows.map((row) => {
-                  table.prepareRow(row)
-                  return <EditCustomersTableRow row={row} />
-                })}
-              </Table.Body>
-            </Table>
-          </TableContainer>
-        </Modal.Content>
+    const handleSearch = (text: string) => {
+        setQuery(text);
 
-        <Modal.Footer>
-          <div className="flex w-full items-center justify-end gap-x-xsmall">
-            <Button
-              variant="ghost"
-              size="small"
-              className="w-eventButton"
-              onClick={onClose}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="primary"
-              size="small"
-              className="w-eventButton"
-              onClick={handleSubmit}
-            >
-              Save
-            </Button>
-          </div>
-        </Modal.Footer>
-      </Modal.Body>
-    </Modal>
-  )
+        if (text) {
+            table.gotoPage(0);
+        }
+    };
+
+    return (
+        <Modal handleClose={onClose}>
+            <Modal.Body>
+                <Modal.Header handleClose={onClose}>
+                    <h3 className="inter-xlarge-semibold">Edit Customers</h3>
+                </Modal.Header>
+
+                <Modal.Content>
+                    <TableContainer
+                        isLoading={isLoading}
+                        hasPagination
+                        numberOfRows={queryObject.limit}
+                        pagingState={{
+                            count: count!,
+                            offset: queryObject.offset,
+                            pageSize: queryObject.offset + table.rows.length,
+                            title: 'Customers',
+                            currentPage: table.state.pageIndex + 1,
+                            pageCount: table.pageCount,
+                            nextPage: handleNext,
+                            prevPage: handlePrev,
+                            hasNext: table.canNextPage,
+                            hasPrev: table.canPreviousPage
+                        }}
+                    >
+                        <Table
+                            filteringOptions={filteringOptions}
+                            enableSearch
+                            handleSearch={handleSearch}
+                            searchValue={queryObject.q}
+                            {...table.getTableProps()}
+                        >
+                            <Table.Head>
+                                {table.headerGroups?.map((headerGroup) => (
+                                    <EditCustomersTableHeaderRow
+                                        headerGroup={headerGroup}
+                                    />
+                                ))}
+                            </Table.Head>
+
+                            <Table.Body {...table.getTableBodyProps()}>
+                                {table.rows.map((row) => {
+                                    table.prepareRow(row);
+                                    return <EditCustomersTableRow row={row} />;
+                                })}
+                            </Table.Body>
+                        </Table>
+                    </TableContainer>
+                </Modal.Content>
+
+                <Modal.Footer>
+                    <div className="flex w-full items-center justify-end gap-x-xsmall">
+                        <Button
+                            variant="ghost"
+                            size="small"
+                            className="w-eventButton"
+                            onClick={onClose}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="primary"
+                            size="small"
+                            className="w-eventButton"
+                            onClick={handleSubmit}
+                        >
+                            Save
+                        </Button>
+                    </div>
+                </Modal.Footer>
+            </Modal.Body>
+        </Modal>
+    );
 }
 
-export default EditCustomersTable
+export default EditCustomersTable;

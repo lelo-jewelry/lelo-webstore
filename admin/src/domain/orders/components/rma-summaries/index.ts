@@ -1,3 +1,3 @@
-import { ClaimSummary } from "./claim-summary"
+import { ClaimSummary } from './claim-summary';
 
-export { ClaimSummary }
+export { ClaimSummary };
