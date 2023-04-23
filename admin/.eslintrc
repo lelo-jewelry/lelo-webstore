@@ -8,7 +8,6 @@
     "sourceType": "module" // Allows for the use of imports
   },
   "plugins": [
-    "eslint-plugin-prettier",
     "unused-imports",
     "react",
     "@typescript-eslint",
@@ -17,14 +16,12 @@
   "extends": [
     "eslint:recommended",
     "google",
-    "eslint-config-prettier",
     "plugin:vitest-globals/recommended"
   ],
   "globals": {
     "__MEDUSA_BACKEND_URL__": true
   },
   "rules": {
-    "prettier/prettier": "error",
     "curly": [
       2,
       "all"
