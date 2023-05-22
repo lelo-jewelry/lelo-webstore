@@ -4,7 +4,7 @@
         "builder": "NIXPACKS"
     },
     "deploy": {
-        "startCommand": "medusa migrations run && medusa start",
+        "startCommand": "npm run migrate && npm run build:admin && medusa start",
         "restartPolicyType": "ON_FAILURE",
         "restartPolicyMaxRetries": 10
     }
