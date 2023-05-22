@@ -14,4 +14,4 @@ RUN mkdir /data
 EXPOSE 9001
 
 # Start Minio server
-CMD ["server", "/data", "--console-address", ":9090", "--address", ":9001"]
+CMD ["server", "/data", "--console-address", "0.0.0.0:9090", "--address", "0.0.0.0:9001"]
