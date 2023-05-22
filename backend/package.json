@@ -7,6 +7,7 @@
     "migrate": "medusa migrations run",
     "build": "babel src -d dist --extensions \".ts,.js\"",
     "build:admin": "medusa-admin build --deployment",
+    "start:admin": "medusa-admin dev",
     "start": "medusa develop"
   },
   "dependencies": {
