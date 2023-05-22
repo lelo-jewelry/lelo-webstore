@@ -35,6 +35,7 @@ module.exports = {
             resolve: "@medusajs/admin",
             /** @type {import('@medusajs/admin').PluginOptions} */
             options: {
+                autoRebuild: true,
                 path: 'adm'
             }
         }
