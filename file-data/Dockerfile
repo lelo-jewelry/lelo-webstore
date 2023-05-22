@@ -12,6 +12,7 @@ RUN mkdir /data
 
 # Expose port 9001 for Minio server
 EXPOSE 9001
+EXPOSE 9090
 
 # Start Minio server
 CMD ["server", "/data", "--console-address", "0.0.0.0:9090", "--address", "0.0.0.0:9001"]
