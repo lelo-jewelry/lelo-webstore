@@ -1,9 +1,10 @@
 # Use the official Minio Docker image as the base image
-FROM minio/minio
+FROM minio/minio AS lelo-file-data
 
 # Set the environment variables
-# ENV MINIO_ACCESS_KEY=myaccesskey
-# ENV MINIO_SECRET_KEY=mysecretkey
+ARG MINIO_USER
+ARG MINIO_PASSWORD
+
 ENV MINIO_ROOT_USER=${MINIO_USER}
 ENV MINIO_ROOT_PASSWORD=${MINIO_PASSWORD}
 
