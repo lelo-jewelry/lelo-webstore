@@ -21,6 +21,12 @@ try {
 const plugins = [
     `medusa-fulfillment-manual`,
     `medusa-payment-manual`,
+    {
+        resolve: "@medusajs/admin",
+        /** @type {import('@medusajs/admin').PluginOptions} */
+        options: {
+        }
+    }
     // {
     //   resolve: `medusa-payment-stripe`,
     //   options: {
@@ -43,4 +49,18 @@ module.exports = {
         admin_cors: process.env.ADMIN_CORS || 'http://localhost:7000,http://localhost:7001'
     },
     plugins,
+    modules: {
+        eventBus: {
+            resolve: "@medusajs/event-bus-redis",
+            options: {
+                redisUrl: process.env.REDIS_URL || 'redis://localhost:6379'
+            }
+        },
+        cacheService: {
+            resolve: "@medusajs/cache-redis",
+            options: {
+                redisUrl: process.env.REDIS_URL || 'redis://localhost:6379'
+            }
+        },
+    }
 };
