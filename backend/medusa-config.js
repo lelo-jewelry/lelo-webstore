@@ -32,6 +32,15 @@ module.exports = {
         `medusa-fulfillment-manual`,
         `medusa-payment-manual`,
         {
+            resolve: 'medusa-plugin-shopify-ts',
+            options: {
+                api_key: "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",
+                domain: "itslelo",
+                default_store_name: "lelo"
+
+            }
+        },
+        {
             resolve: "@medusajs/admin",
             /** @type {import('@medusajs/admin').PluginOptions} */
             options: {
