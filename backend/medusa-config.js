@@ -48,6 +48,17 @@ module.exports = {
                 secret_access_key: process.env.MINIO_SECRET_KEY,
             },
         },
+        {
+            resolve: `medusa-plugin-meilisearch`,
+            options: {
+                config: {
+                    host: process.env.MEILISEARCH_HOST,
+                    apiKey: process.env.MEILISEARCH_API_KEY,
+                },
+                settings: {
+                }
+            }
+        }
         // {
         //   resolve: `medusa-payment-stripe`,
         //   options: {
