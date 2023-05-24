@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch medusa backend",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm start",
+            "cwd": "${workspaceFolder}/backend",
+            "env": {
+            }
+        },
+        {
+            "name": "Launch NextJs storefront",
+            "type": "node-terminal",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/storefront",
+            "command": "npm run dev",
+            "env": {
+            }
+        }
+    ],
+    "compounds": [
+        {
+            "name": "Launch storefront with backend",
+            "configurations": [
+                "Launch medusa backend",
+                "Launch NextJs storefront"
+            ]
+        }
+    ]
+}

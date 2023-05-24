@@ -47,7 +47,7 @@ const Login = () => {
             )}
             <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
             <p className="text-center text-base-regular text-gray-700 mb-8">
-                Sign in to access an enhanced shopping experience.
+                Sign in for exclusive deals and membership perks
             </p>
             <form className="w-full" onSubmit={onSubmit}>
                 <div className="flex flex-col w-full gap-y-2">

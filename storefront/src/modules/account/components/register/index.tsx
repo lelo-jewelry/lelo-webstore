@@ -50,30 +50,29 @@ const Register = () => {
                 </div>
             )}
             <h1 className="text-large-semi uppercase mb-6">
-                Become a Acme Member
+                Become a lelo Member
             </h1>
             <p className="text-center text-base-regular text-gray-700 mb-4">
-                Create your Acme Member profile, and get access to an enhanced
-                shopping experience.
+                Create your profile for access to exclusve deals and our latest styles.
             </p>
             <form className="w-full flex flex-col" onSubmit={onSubmit}>
                 <div className="flex flex-col w-full gap-y-2">
-                    <Input
+                    {/* <Input
                         label="First name"
                         {...register('first_name', {
                             required: 'First name is required'
                         })}
                         autoComplete="given-name"
                         errors={errors}
-                    />
-                    <Input
+                    /> */}
+                    {/* <Input
                         label="Last name"
                         {...register('last_name', {
                             required: 'Last name is required'
                         })}
                         autoComplete="family-name"
                         errors={errors}
-                    />
+                    /> */}
                     <Input
                         label="Email"
                         {...register('email', {
@@ -82,12 +81,12 @@ const Register = () => {
                         autoComplete="email"
                         errors={errors}
                     />
-                    <Input
+                    {/* <Input
                         label="Phone"
                         {...register('phone')}
                         autoComplete="tel"
                         errors={errors}
-                    />
+                    /> */}
                     <Input
                         label="Password"
                         {...register('password', {
@@ -106,13 +105,13 @@ const Register = () => {
                     </div>
                 )}
                 <span className="text-center text-gray-700 text-small-regular mt-6">
-                    By creating an account, you agree to Acme&apos;s{' '}
+                    By creating an account, you agree to our{' '}
                     <Link href="/content/privacy-policy">
-                        <a className="underline">Privacy Policy</a>
+                        <a target="_blank" className="underline">Privacy Policy</a>
                     </Link>{' '}
                     and{' '}
                     <Link href="/content/terms-of-use">
-                        <a className="underline">Terms of Use</a>
+                        <a target="_blank" className="underline">Terms of Use</a>
                     </Link>
                     .
                 </span>
