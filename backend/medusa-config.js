@@ -80,11 +80,13 @@ module.exports = {
             }
         },
         {
-          resolve: 'medusa-payment-stripe',
-          options: {
-            api_key: process.env.STRIPE_API_KEY || '',
-            webhook_secret: process.env.STRIPE_WEBHOOK_SECRET || '',
-          }
+            resolve: 'medusa-payment-stripe',
+            /** @type {import('medusa-payment-stripe').StripeOptions} */
+            options: {
+                automatic_payment_methods: { enabled: true },
+                api_key: process.env.STRIPE_API_KEY || '',
+                webhook_secret: process.env.STRIPE_WEBHOOK_SECRET || '',
+            }
         }
     ],
     modules: {
