@@ -4,7 +4,8 @@ export default function TermsOfUse() {
             <div className="py-8">
                 <h1 className="text-3xl font-bold mb-4">Terms of Service</h1>
                 <p className="text-gray-700 mb-4 text-base">
-                    Please read these Terms of Service ("Terms") carefully before using www.lelo.jewelry (the "Website") operated by Lelo Jewelry ("us," "we," or "our").
+                    Please read these Terms of Service (&quot;Terms&quot;) carefully before using www.lelo.jewelry (the &quot;Website&quot;)
+                    operated by Lelo Jewelry (&quot;us,&quot; &quot;we,&quot; or &quot;our&quot;).
                     These Terms govern your use of the Website and constitute a legally binding agreement between you and us.
                 </p>
                 <p className="text-gray-700 mb-4 text-base font-bold">Acceptance of Terms:</p>
@@ -72,7 +73,7 @@ export default function TermsOfUse() {
                     <li className="text-gray-700 text-base mb-2">
                         <strong>(a) Disclaimer of Warranties:</strong>
                         <p>
-                            The Website and its content are provided on an "as is" and "as available" basis, without any warranties of any kind,
+                            The Website and its content are provided on an &quot;as is&quot; and &quot;as available&quot; basis, without any warranties of any kind,
                             whether express or implied. We do not warrant that the Website will be uninterrupted, error-free, or secure,
                             or that any defects or errors will be corrected.
                         </p>
@@ -95,15 +96,19 @@ export default function TermsOfUse() {
 
                 <p className="text-gray-700 mb-4 text-base font-bold">Termination:</p>
                 <p className="mb-4">
-                    We may, in our sole discretion, terminate or suspend your access to the Website, without prior notice or liability, for any reason whatsoever, including without limitation if you breach these Terms. Upon termination, your right to use the Website will immediately cease.
+                    We may, in our sole discretion, terminate or suspend your access to the Website, without prior notice or liability,
+                    for any reason whatsoever, including without limitation if you breach these Terms. Upon termination, your right to use
+                    the Website will immediately cease.
                 </p>
                 <p className="text-gray-700 mb-4 text-base font-bold">Modifications:</p>
                 <p className="mb-4">
-                    We reserve the right, at our sole discretion, to modify or replace these Terms at any time. The most current version of the Terms will be posted on the Website. Your continued use of the Website after any such changes constitutes your acceptance of the revised Terms.
+                    We reserve the right, at our sole discretion, to modify or replace these Terms at any time. The most current version of the
+                    Terms will be posted on the Website. Your continued use of the Website after any such changes constitutes your acceptance of the revised Terms.
                 </p>
                 <p className="text-gray-700 mb-4 text-base font-bold">Governing Law:</p>
                 <p className="mb-4">
-                    These Terms shall be governed by and construed in accordance with the laws of the United States of America, without regard to its conflict of law provisions.
+                    These Terms shall be governed by and construed in accordance with the laws of the United States of America, without regard
+                    to its conflict of law provisions.
                 </p>
                 <p className="text-gray-700 mb-4 text-base font-bold">Contact Information:</p>
                 <p className="mb-4">

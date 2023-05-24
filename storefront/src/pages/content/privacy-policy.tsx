@@ -48,7 +48,7 @@ export default function PrivacyPolicy() {
                         <p>
                             While you browse our website, certain non-personal information may be automatically collected, such as your IP address,
                             browser type, operating system, and the pages you visit. This information is collected through standard analytics tools
-                            and technologies, solely for the purpose of improving our website's functionality and enhancing the user experience.
+                            and technologies, solely for the purpose of improving our website&apos;s functionality and enhancing the user experience.
                         </p>
                     </li>
                     <li className="text-gray-700 text-base mb-2">
@@ -69,7 +69,7 @@ export default function PrivacyPolicy() {
                         </p>
                     </li>
                     <li className="text-gray-700 text-base mb-2">
-                        <strong>Children's Privacy:</strong>
+                        <strong>Children&apos;s Privacy:</strong>
                         <p>
                             Our website is not directed towards individuals under the age of 13. We do not knowingly collect any personal information from children.
                             If you believe that we have inadvertently collected information from a child, please contact us, and we will promptly remove the
