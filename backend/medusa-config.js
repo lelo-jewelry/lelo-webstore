@@ -29,19 +29,10 @@ module.exports = {
         admin_cors: process.env.ADMIN_CORS || 'http://localhost:7000,http://localhost:7001'
     },
     plugins: [
-        `medusa-fulfillment-manual`,
-        `medusa-payment-manual`,
+        'medusa-fulfillment-manual',
+        'medusa-payment-manual',
         {
-            resolve: 'medusa-plugin-shopify-ts',
-            options: {
-                api_key: "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",
-                domain: "itslelo",
-                default_store_name: "lelo"
-
-            }
-        },
-        {
-            resolve: "@medusajs/admin",
+            resolve: '@medusajs/admin',
             /** @type {import('@medusajs/admin').PluginOptions} */
             options: {
                 autoRebuild: true,
@@ -49,7 +40,7 @@ module.exports = {
             }
         },
         {
-            resolve: `medusa-file-minio`,
+            resolve: 'medusa-file-minio',
             options: {
                 endpoint: process.env.MINIO_ENDPOINT,
                 bucket: process.env.MINIO_BUCKET,
@@ -58,7 +49,7 @@ module.exports = {
             },
         },
         {
-            resolve: `medusa-plugin-meilisearch`,
+            resolve: 'medusa-plugin-meilisearch',
             options: {
                 config: {
                     host: process.env.MEILISEARCH_HOST,
@@ -68,43 +59,43 @@ module.exports = {
                     products: {
                         indexSettings: {
                             searchableAttributes: [
-                                "title",
-                                "description",
-                                "variant_sku",
+                                'title',
+                                'description',
+                                'variant_sku',
                             ],
                             displayedAttributes: [
-                                "title",
-                                "description",
-                                "variant_sku",
-                                "thumbnail",
-                                "handle",
+                                'title',
+                                'description',
+                                'variant_sku',
+                                'thumbnail',
+                                'handle',
                             ],
                         },
-                        primaryKey: "id",
+                        primaryKey: 'id',
                         transform: (product) => ({
                             id: product.id
                         }),
                     }
                 }
             }
+        },
+        {
+          resolve: 'medusa-payment-stripe',
+          options: {
+            api_key: process.env.STRIPE_API_KEY || '',
+            webhook_secret: process.env.STRIPE_WEBHOOK_SECRET || '',
+          }
         }
-        // {
-        //   resolve: `medusa-payment-stripe`,
-        //   options: {
-        //     api_key: process.env.STRIPE_API_KEY || '',
-        //     webhook_secret: process.env.STRIPE_WEBHOOK_SECRET || '',
-        //   },
-        // }
     ],
     modules: {
         eventBus: {
-            resolve: "@medusajs/event-bus-redis",
+            resolve: '@medusajs/event-bus-redis',
             options: {
                 redisUrl: process.env.REDIS_URL || 'redis://localhost:6379'
             }
         },
         cacheService: {
-            resolve: "@medusajs/cache-redis",
+            resolve: '@medusajs/cache-redis',
             options: {
                 redisUrl: process.env.REDIS_URL || 'redis://localhost:6379'
             }
