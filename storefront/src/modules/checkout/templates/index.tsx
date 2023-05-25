@@ -23,7 +23,7 @@ const CheckoutTemplate = () => {
                             </a>
                         </Link>
                         <Link href="/">
-                            <a className="text-xl-semi">lelo</a>
+                            <a className="text-xl-semi uppercase">lelo</a>
                         </Link>
                         <div className="flex-1 basis-0" />
                     </nav>

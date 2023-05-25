@@ -5,11 +5,11 @@ const EmptyCartMessage = () => {
         <div className="bg-amber-100 px-8 py-24 flex flex-col justify-center items-center text-center">
             <h1 className="text-2xl-semi">Your shopping cart is empty</h1>
             <p className="text-base-regular mt-4 mb-6 max-w-[32rem]">
-                You don&apos;t have anything in your bag. Let&apos;s change
-                that, use the link below to start browsing our products.
+                You don&apos;t have anything in your cart. Let&apos;s change
+                that! use the link below to start browsing.
             </p>
             <div>
-                <UnderlineLink href="/store">Explore products</UnderlineLink>
+                <UnderlineLink href="/store">Explore our collections</UnderlineLink>
             </div>
         </div>
     );

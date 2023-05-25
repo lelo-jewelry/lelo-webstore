@@ -25,29 +25,18 @@ const Addresses = () => {
                 <div className="px-8 pb-8">
                     <ShippingAddress />
                     <div className="mt-6">
-                        <Checkbox
-                            label="Same as billing address"
-                            checked={checked}
-                            onChange={onChange}
-                        />
+                        <Checkbox label="Same as billing address" checked={checked} onChange={onChange} />
                     </div>
                     {!checked && (
                         <div>
                             <div className="text-xl-semi flex items-center gap-x-4 pb-6 pt-8">
-                                <div className="bg-gray-900 w-8 h-8 rounded-full text-white flex justify-center items-center font-mono text-sm">
-                                    2
-                                </div>
+                                <div className="bg-gray-900 w-8 h-8 rounded-full text-white flex justify-center items-center font-mono text-sm">2</div>
                                 <h2>Billing address</h2>
                             </div>
                             <BillingAddress />
                         </div>
                     )}
-                    <Button
-                        className="max-w-[200px] mt-6"
-                        onClick={handleSubmit(setAddresses)}
-                    >
-                        Continue to delivery
-                    </Button>
+                    <Button className="max-w-[200px] mt-6" onClick={handleSubmit(setAddresses)}>Continue to delivery</Button>
                 </div>
             ) : (
                 <div>
@@ -55,7 +44,7 @@ const Addresses = () => {
                         {cart && cart.shipping_address ? (
                             <div className="flex items-start gap-x-8">
                                 <div className="bg-green-400 rounded-full min-w-[24px] h-6 flex items-center justify-center text-white text-small-regular">
-                                    ✓
+                                    <span>✓</span>
                                 </div>
                                 <div className="flex items-start justify-between w-full">
                                     <div className="flex flex-col">

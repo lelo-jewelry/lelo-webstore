@@ -78,28 +78,28 @@ const fetchFeaturedProducts = async (
                 thumbnail: p.thumbnail,
                 price: cheapestVariant
                     ? {
-                          calculated_price: formatAmount({
-                              amount: cheapestVariant.calculated_price,
-                              region: region,
-                              includeTaxes: false
-                          }),
-                          original_price: formatAmount({
-                              amount: cheapestVariant.original_price,
-                              region: region,
-                              includeTaxes: false
-                          }),
-                          difference: getPercentageDiff(
-                              cheapestVariant.original_price,
-                              cheapestVariant.calculated_price
-                          ),
-                          price_type: cheapestVariant.calculated_price_type
-                      }
+                        calculated_price: formatAmount({
+                            amount: cheapestVariant.calculated_price,
+                            region: region,
+                            includeTaxes: false
+                        }),
+                        original_price: formatAmount({
+                            amount: cheapestVariant.original_price,
+                            region: region,
+                            includeTaxes: false
+                        }),
+                        difference: getPercentageDiff(
+                            cheapestVariant.original_price,
+                            cheapestVariant.calculated_price
+                        ),
+                        price_type: cheapestVariant.calculated_price_type
+                    }
                     : {
-                          calculated_price: 'N/A',
-                          original_price: 'N/A',
-                          difference: 'N/A',
-                          price_type: 'default'
-                      }
+                        calculated_price: 'N/A',
+                        original_price: 'N/A',
+                        difference: 'N/A',
+                        price_type: 'default'
+                    }
             };
         });
 };
