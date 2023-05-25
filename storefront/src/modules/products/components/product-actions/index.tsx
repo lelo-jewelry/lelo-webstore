@@ -12,10 +12,13 @@ type ProductActionsProps = {
 };
 
 const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
-    const { updateOptions, addToCart, options, inStock, variant } =
-        useProductActions();
+    const { updateOptions, addToCart, options, inStock, variant } = useProductActions();
 
     const price = useProductPrice({ id: product.id, variantId: variant?.id });
+
+    const optionsSelected = useMemo(() => {
+        return Object.values(options).filter((o) => o !== undefined).length;
+    }, [options]);
 
     const selectedPrice = useMemo(() => {
         const { variantPrice, cheapestPrice } = price;
@@ -84,9 +87,11 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
                     <div></div>
                 )}
             </div>
-
-            <Button onClick={addToCart}>
-                {!inStock ? 'Out of stock' : 'Add to cart'}
+            <Button disabled={!inStock} onClick={addToCart}>
+                {product.options.length === optionsSelected || inStock
+                    ? <span>{!inStock ? 'Out of stock' : 'Add to cart'}</span>
+                    : <span>Select an option</span>
+                }
             </Button>
         </div>
     );

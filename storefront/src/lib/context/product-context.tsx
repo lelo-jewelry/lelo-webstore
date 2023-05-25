@@ -109,9 +109,10 @@ export const ProductProvider = ({
     }, [variant, variants, cart]);
 
     useEffect(() => {
-        if (variant) {
-            setInStock(canBuy(variant));
-        }
+        const checkVariant = variant || {
+            inventory_quantity: 0
+        } as Variant;
+        setInStock(canBuy(checkVariant));
     }, [variant]);
 
     const updateOptions = (update: Record<string, string>) => {
