@@ -16,7 +16,7 @@ const Head: React.FC<HeadProps> = ({ title, description, image }) => {
                 <meta itemProp="description" content={description} />
             )}
             {image && <meta itemProp="image" content={image} />}
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href="/favicon-32x32.png" />
         </NextHead>
     );
 };
