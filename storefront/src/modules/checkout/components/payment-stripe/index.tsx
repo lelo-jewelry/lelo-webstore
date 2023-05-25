@@ -1,8 +1,4 @@
-import {
-    CardCvcElement,
-    CardExpiryElement,
-    CardNumberElement
-} from '@stripe/react-stripe-js';
+import { CardCvcElement, CardExpiryElement, CardNumberElement } from '@stripe/react-stripe-js';
 import {
     StripeCardCvcElementOptions,
     StripeCardExpiryElementOptions,
@@ -15,33 +11,28 @@ const PaymentStripe: React.FC = () => {
         | StripeCardNumberElementOptions
         | StripeCardExpiryElementOptions
         | StripeCardCvcElementOptions = useMemo(() => {
-        return {
-            style: {
-                base: {
-                    fontFamily: 'Inter, sans-serif',
-                    color: '#424270',
-                    padding: '10px 12px',
-                    '::placeholder': {
-                        color: '#CFD7E0'
+            return {
+                style: {
+                    base: {
+                        fontFamily: 'Inter, sans-serif',
+                        color: '#424270',
+                        // The stripe react plugin does not allow this value
+                        // padding: '10px 12px',
+                        '::placeholder': {
+                            color: '#CFD7E0'
+                        }
                     }
                 }
-            }
-        };
-    }, []);
+            };
+        }, []);
 
     return (
         <div>
             <div className="flex flex-col relative w-full pb-6">
-                <CardNumber
-                    options={useOptions as StripeCardNumberElementOptions}
-                />
+                <CardNumber options={useOptions as StripeCardNumberElementOptions} />
                 <div className="flex items-center mt-12 relative gap-x-4">
-                    <CardExpiry
-                        options={useOptions as StripeCardExpiryElementOptions}
-                    />
-                    <CardCVC
-                        options={useOptions as StripeCardCvcElementOptions}
-                    />
+                    <CardExpiry options={useOptions as StripeCardExpiryElementOptions} />
+                    <CardCVC options={useOptions as StripeCardCvcElementOptions} />
                 </div>
             </div>
         </div>
@@ -55,19 +46,13 @@ const CardNumber = ({
 }) => {
     return (
         <div className="border-b border-gray-200 py-2 relative">
-            <span className="absolute -top-6 text-gray-700 text-base-regular">
-                Card number
-            </span>
+            <span className="absolute -top-6 text-gray-700 text-base-regular">Card number</span>
             <CardNumberElement options={options} />
         </div>
     );
 };
 
-const CardExpiry = ({
-    options
-}: {
-    options: StripeCardExpiryElementOptions;
-}) => {
+const CardExpiry = ({ options }: { options: StripeCardExpiryElementOptions }) => {
     return (
         <div className="border-b border-gray-200 w-full py-2 relative">
             <span className="absolute -top-6 text-gray-700 text-base-regular">

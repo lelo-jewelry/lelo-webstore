@@ -1,6 +1,5 @@
 import UnderlineLink from '@modules/common/components/underline-link';
 import Image from 'next/image';
-import heroImage from '../../../../../public/images/home/hero_pink.jpeg';
 
 const Hero = () => {
     return (
@@ -19,7 +18,7 @@ const Hero = () => {
                 </div>
             </div>
             <Image
-                src={heroImage}
+                src="/images/home/hero_pink.jpeg"
                 layout="fill"
                 loading="eager"
                 priority={true}

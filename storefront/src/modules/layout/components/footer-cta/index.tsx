@@ -1,6 +1,5 @@
 import UnderlineLink from '@modules/common/components/underline-link';
 import Image from 'next/image';
-import footerImage from '../../../../../public/images/rings_2.jpeg';
 
 const FooterCTA = () => {
     return (
@@ -17,10 +16,11 @@ const FooterCTA = () => {
 
                 <div className="relative w-full aspect-square small:w-[35%] small:aspect-[28/36]">
                     <Image
-                        src={footerImage}
+                        src="/images/rings_2.jpeg"
                         alt="https://www.instagram.com/lelojewelry"
                         layout="fill"
                         objectFit="cover"
+                        priority={true}
                         className="absolute inset-0"
                     />
                 </div>

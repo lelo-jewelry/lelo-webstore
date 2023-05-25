@@ -27,16 +27,14 @@ const Wrapper: React.FC<WrapperProps> = ({ paymentSession, children }) => {
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY || '');
 
-const StripeWrapper: React.FC<WrapperProps> = ({
-    paymentSession,
-    children
-}) => {
+const StripeWrapper: React.FC<WrapperProps> = ({ paymentSession, children }) => {
+    const clientSecret = paymentSession!.data.client_secret as string | undefined;
     const options: StripeElementsOptions = {
-        clientSecret: paymentSession!.data.client_secret as string | undefined
+        clientSecret
     };
 
     return (
-        <Elements stripe={stripePromise} options={options}>
+        <Elements stripe={stripePromise} options={options} key={clientSecret}>
             {children}
         </Elements>
     );
