@@ -1,5 +1,5 @@
 import { Tab } from '@headlessui/react';
-import { Product } from '@medusajs/medusa';
+import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 import Back from '@modules/common/icons/back';
 import FastDelivery from '@modules/common/icons/fast-delivery';
 import Refresh from '@modules/common/icons/refresh';
@@ -7,7 +7,7 @@ import clsx from 'clsx';
 import { useMemo } from 'react';
 
 type ProductTabsProps = {
-    product: Product;
+    product: PricedProduct;
 };
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
@@ -93,7 +93,7 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
                     </div>
                 </div>
             </div>
-            {product.tags.length ? (
+            {product.tags?.length ? (
                 <div>
                     <span className="font-semibold">Tags</span>
                 </div>

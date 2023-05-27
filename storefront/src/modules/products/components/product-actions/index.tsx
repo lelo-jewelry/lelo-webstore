@@ -1,20 +1,20 @@
 import { useProductActions } from '@lib/context/product-context';
 import useProductPrice from '@lib/hooks/use-product-price';
+import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 import Button from '@modules/common/components/button';
 import OptionSelect from '@modules/products/components/option-select';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useMemo } from 'react';
-import { Product } from 'types/medusa';
 
 type ProductActionsProps = {
-    product: Product;
+    product: PricedProduct;
 };
 
 const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
     const { updateOptions, addToCart, options, inStock, variant } = useProductActions();
 
-    const price = useProductPrice({ id: product.id, variantId: variant?.id });
+    const price = useProductPrice({ id: product.id!, variantId: variant?.id });
 
     const optionsSelected = useMemo(() => {
         return Object.values(options).filter((o) => o !== undefined).length;
@@ -41,15 +41,10 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
 
             {product.variants.length > 1 && (
                 <div className="my-8 flex flex-col gap-y-6">
-                    {product.options.map((option) => {
+                    {(product.options || []).map((option) => {
                         return (
                             <div key={option.id}>
-                                <OptionSelect
-                                    option={option}
-                                    current={options[option.id]}
-                                    updateOption={updateOptions}
-                                    title={option.title}
-                                />
+                                <OptionSelect option={option} current={options[option.id]} updateOption={updateOptions} title={option.title} />
                             </div>
                         );
                     })}
@@ -59,12 +54,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
             <div className="mb-4">
                 {selectedPrice ? (
                     <div className="flex flex-col text-gray-700">
-                        <span
-                            className={clsx('text-xl-semi', {
-                                'text-rose-600':
-                                    selectedPrice.price_type === 'sale'
-                            })}
-                        >
+                        <span className={clsx('text-xl-semi', { 'text-rose-600': selectedPrice.price_type === 'sale' })} >
                             {selectedPrice.calculated_price}
                         </span>
                         {selectedPrice.price_type === 'sale' && (
@@ -88,7 +78,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
                 )}
             </div>
             <Button disabled={!inStock} onClick={addToCart}>
-                {product.options.length === optionsSelected || inStock
+                {product.options!.length === optionsSelected || inStock
                     ? <span>{!inStock ? 'Out of stock' : 'Add to cart'}</span>
                     : <span>Select an option</span>
                 }

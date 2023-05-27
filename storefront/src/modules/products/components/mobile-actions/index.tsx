@@ -7,11 +7,11 @@ import ChevronDown from '@modules/common/icons/chevron-down';
 import X from '@modules/common/icons/x';
 import clsx from 'clsx';
 import React, { Fragment, useMemo } from 'react';
-import { Product } from 'types/medusa';
 import OptionSelect from '../option-select';
+import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 
 type MobileActionsProps = {
-    product: Product;
+    product: PricedProduct;
     show: boolean;
 };
 
@@ -20,7 +20,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
         useProductActions();
     const { state, open, close } = useToggleState();
 
-    const price = useProductPrice({ id: product.id, variantId: variant?.id });
+    const price = useProductPrice({ id: product.id!, variantId: variant?.id });
 
     const selectedPrice = useMemo(() => {
         const { variantPrice, cheapestPrice } = price;
@@ -117,43 +117,20 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
                             >
                                 <Dialog.Panel className="w-full h-full transform overflow-hidden text-left flex flex-col gap-y-3">
                                     <div className="w-full flex justify-end pr-6">
-                                        <button
-                                            onClick={close}
-                                            className="bg-white w-12 h-12 rounded-full text-gray-900 flex justify-center items-center"
-                                        >
+                                        <button onClick={close} className="bg-white w-12 h-12 rounded-full text-gray-900 flex justify-center items-center">
                                             <X />
                                         </button>
                                     </div>
                                     <div className="bg-white px-6 py-12">
                                         {product.variants.length > 1 && (
                                             <div className="flex flex-col gap-y-6">
-                                                {product.options.map(
-                                                    (option) => {
-                                                        return (
-                                                            <div
-                                                                key={option.id}
-                                                            >
-                                                                <OptionSelect
-                                                                    option={
-                                                                        option
-                                                                    }
-                                                                    current={
-                                                                        options[
-                                                                            option
-                                                                                .id
-                                                                        ]
-                                                                    }
-                                                                    updateOption={
-                                                                        updateOptions
-                                                                    }
-                                                                    title={
-                                                                        option.title
-                                                                    }
-                                                                />
-                                                            </div>
-                                                        );
-                                                    }
-                                                )}
+                                                {(product.options || []).map((option) => {
+                                                    return (
+                                                        <div key={option.id}>
+                                                            <OptionSelect option={option} current={options[option.id]} updateOption={updateOptions} title={option.title} />
+                                                        </div>
+                                                    );
+                                                })}
                                             </div>
                                         )}
                                     </div>
