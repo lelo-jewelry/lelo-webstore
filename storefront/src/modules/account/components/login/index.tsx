@@ -84,7 +84,7 @@ const Login = () => {
                     onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
                     className="underline"
                 >
-                    Join us
+                    Create an account
                 </button>
                 .
             </span>

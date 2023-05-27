@@ -53,7 +53,7 @@ const Register = () => {
                 Become a lelo Member
             </h1>
             <p className="text-center text-base-regular text-gray-700 mb-4">
-                Create your profile for access to exclusve deals and our latest styles.
+                Create your profile for access to exclusive deals and our latest styles.
             </p>
             <form className="w-full flex flex-col" onSubmit={onSubmit}>
                 <div className="flex flex-col w-full gap-y-2">

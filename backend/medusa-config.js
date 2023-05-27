@@ -30,7 +30,6 @@ module.exports = {
     },
     plugins: [
         'medusa-fulfillment-manual',
-        'medusa-payment-manual',
         {
             resolve: '@medusajs/admin',
             /** @type {import('@medusajs/admin').PluginOptions} */
