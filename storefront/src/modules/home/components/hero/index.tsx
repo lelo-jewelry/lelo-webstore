@@ -18,7 +18,7 @@ const Hero = () => {
                 </div>
             </div>
             <Image
-                src="/images/home/hero_pink.jpeg"
+                src="/images/home/hero_white.jpeg"
                 layout="fill"
                 loading="eager"
                 priority={true}
