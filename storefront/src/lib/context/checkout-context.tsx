@@ -198,9 +198,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
      */
     const createPaymentSession = async (cartId: string) => {
         return medusaClient.carts
-            .createPaymentSessions(cartId, {
-                'Idempotency-Key': IDEMPOTENCY_KEY
-            })
+            .createPaymentSessions(cartId, { 'Idempotency-Key': IDEMPOTENCY_KEY })
             .then(({ cart }) => cart)
             .catch(() => null);
     };

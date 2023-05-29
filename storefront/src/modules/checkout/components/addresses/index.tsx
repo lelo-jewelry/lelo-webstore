@@ -13,6 +13,7 @@ const Addresses = () => {
         handleSubmit,
         cart
     } = useCheckout();
+
     return (
         <div className="bg-white">
             <div className="text-xl-semi flex items-center gap-x-4 px-8 pb-6 pt-8">
@@ -108,31 +109,15 @@ const Addresses = () => {
                                         <div className="flex items-start justify-between w-full">
                                             <div className="flex flex-col">
                                                 <span>
-                                                    {
-                                                        cart.billing_address
-                                                            .first_name
-                                                    }{' '}
-                                                    {
-                                                        cart.billing_address
-                                                            .last_name
-                                                    }
+                                                    {cart.billing_address.first_name}{' '}
+                                                    {cart.billing_address.last_name}
                                                 </span>
                                                 <span>
-                                                    {
-                                                        cart.billing_address
-                                                            .address_1
-                                                    }{' '}
-                                                    {
-                                                        cart.billing_address
-                                                            .address_2
-                                                    }
+                                                    {cart.billing_address.address_1}{' '}
+                                                    {cart.billing_address.address_2}
                                                 </span>
                                                 <span>
-                                                    {
-                                                        cart.billing_address
-                                                            .postal_code
-                                                    }
-                                                    ,{' '}
+                                                    {cart.billing_address.postal_code},{' '}
                                                     {cart.billing_address.city}
                                                 </span>
                                                 <span>
@@ -141,10 +126,7 @@ const Addresses = () => {
 
                                                 <div className="mt-4 flex flex-col">
                                                     <span>
-                                                        {
-                                                            cart.billing_address
-                                                                .phone
-                                                        }
+                                                        {cart.billing_address.phone}
                                                     </span>
                                                 </div>
                                             </div>

@@ -8,6 +8,7 @@ import CountrySelect from '../country-select';
 
 const ShippingAddress = () => {
     const { customer } = useMeCustomer();
+
     return (
         <div>
             {customer && (customer.shipping_addresses?.length || 0) > 0 && (
