@@ -16,7 +16,7 @@ const FooterCTA = () => {
 
                 <div className="relative w-full aspect-square small:w-[35%] small:aspect-[28/36]">
                     <Image
-                        src="/images/rings_2.jpeg"
+                        src="/images/brazilian_model_1.png"
                         alt="https://www.instagram.com/lelojewelry"
                         layout="fill"
                         objectFit="cover"
