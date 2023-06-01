@@ -27,14 +27,12 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                     return (
                         <button
                             key={image.id}
-                            className="h-14 w-12 relative border border-white"
+                            className="h-14 w-14 relative border border-white"
                             onClick={() => {
                                 handleScrollTo(image.id);
                             }}
                         >
-                            <span className="sr-only">
-                                Go to image {index + 1}
-                            </span>
+                            <span className="sr-only">Go to image {index + 1}</span>
                             <Image
                                 src={image.url}
                                 layout="fill"
