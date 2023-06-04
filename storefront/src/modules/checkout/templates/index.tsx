@@ -14,12 +14,8 @@ const CheckoutTemplate = () => {
                         <Link href="/cart">
                             <a className="text-small-semi text-gray-700 flex items-center gap-x-2 uppercase flex-1 basis-0">
                                 <ChevronDown className="rotate-90" size={16} />
-                                <span className="mt-px hidden small:block">
-                                    Back to shopping cart
-                                </span>
-                                <span className="mt-px block small:hidden">
-                                    Back
-                                </span>
+                                <span className="mt-px hidden small:block">Back to shopping cart</span>
+                                <span className="mt-px block small:hidden">Back</span>
                             </a>
                         </Link>
                         <Link href="/">

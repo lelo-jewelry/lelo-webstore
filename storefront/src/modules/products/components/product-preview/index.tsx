@@ -3,19 +3,21 @@ import Link from 'next/link';
 import { ProductPreviewType } from 'types/global';
 import Thumbnail from '../thumbnail';
 
-const ProductPreview = ({
-    title,
-    handle,
-    thumbnail,
-    price
-}: ProductPreviewType) => {
+const ProductPreview = ({ title, handle, thumbnail, price, hasInventory }: ProductPreviewType) => {
     return (
         <Link href={`/products/${handle}`}>
             <a>
                 <div>
                     <Thumbnail thumbnail={thumbnail} size="full" />
                     <div className="text-base-regular mt-2">
-                        <span>{title}</span>
+                        {hasInventory
+                            ? (<span>{title}</span>)
+                            : (<>
+                                <span className="line-through">{title}</span>
+                                &nbsp;
+                                <span>Out of stock</span>
+                            </>)
+                        }
                         <div className="flex items-center gap-x-2 mt-1">
                             {price ? (
                                 <>

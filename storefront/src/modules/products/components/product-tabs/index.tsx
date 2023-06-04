@@ -14,12 +14,12 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
     const tabs = useMemo(() => {
         return [
             {
-                label: 'Product Information',
-                component: <ProductInfoTab product={product} />
-            },
-            {
                 label: 'Shipping & Returns',
                 component: <ShippingInfoTab />
+            },
+            {
+                label: 'Product Information',
+                component: <ProductInfoTab product={product} />
             }
         ];
     }, [product]);
@@ -59,38 +59,34 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
 const ProductInfoTab = ({ product }: ProductTabsProps) => {
     return (
         <Tab.Panel className="text-small-regular py-8">
-            <div className="grid grid-cols-2 gap-x-8">
+            <div className="grid grid-cols-2">
                 <div className="flex flex-col gap-y-4">
                     <div>
-                        <span className="font-semibold">Material</span>
-                        <p>{product.material ? product.material : '-'}</p>
-                    </div>
-                    <div>
                         <span className="font-semibold">Country of origin</span>
-                        <p>
-                            {product.origin_country
-                                ? product.origin_country
-                                : '-'}
-                        </p>
+                        <p>{product.origin_country ? product.origin_country : 'Brazil'}</p>
                     </div>
                     <div>
+                        <span className="font-semibold">Material</span>
+                        <p>{product.material ? product.material : 'Safe for sensitive skin'}</p>
+                    </div>
+                    {/* <div>
                         <span className="font-semibold">Type</span>
                         <p>{product.type ? product.type.value : '-'}</p>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="flex flex-col gap-y-4">
                     <div>
+                        <span className="font-semibold">Durability</span>
+                        <p>Tarnish resistant</p>
+                    </div>
+                    {/* <div>
                         <span className="font-semibold">Weight</span>
                         <p>{product.weight ? `${product.weight} g` : '-'}</p>
-                    </div>
-                    <div>
+                    </div> */}
+                    {/* <div>
                         <span className="font-semibold">Dimensions</span>
-                        <p>
-                            {product.length && product.width && product.height
-                                ? `${product.length}L x ${product.width}W x ${product.height}H`
-                                : '-'}
-                        </p>
-                    </div>
+                        <p>{product.length && product.width && product.height ? `${product.length}L x ${product.width}W x ${product.height}H` : '-'}</p>
+                    </div> */}
                 </div>
             </div>
             {product.tags?.length ? (
@@ -111,9 +107,8 @@ const ShippingInfoTab = () => {
                     <div>
                         <span className="font-semibold">Fast delivery</span>
                         <p className="max-w-sm">
-                            Your package will arrive in 3-5 business days at
-                            your pick up location or in the comfort of your
-                            home.
+                            Your package will arrive in 3-5 business days, ready
+                            to be worn on your next adventure or at your favorite outing.
                         </p>
                     </div>
                 </div>
@@ -122,12 +117,13 @@ const ShippingInfoTab = () => {
                     <div>
                         <span className="font-semibold">Simple exchanges</span>
                         <p className="max-w-sm">
-                            Is the fit not quite right? No worries - we&apos;ll
-                            exchange your product for a new one.
+                            Doesn't look quite like you expected? No worries - we give you
+                            30 worry-free days to make sure you chose the right look for you.
                         </p>
                     </div>
                 </div>
-                <div className="flex items-start gap-x-2">
+                {/* TBD returns */}
+                {/* <div className="flex items-start gap-x-2">
                     <Back />
                     <div>
                         <span className="font-semibold">Easy returns</span>
@@ -137,7 +133,7 @@ const ShippingInfoTab = () => {
                             to make sure your return is hassle-free.
                         </p>
                     </div>
-                </div>
+                </div> */}
             </div>
         </Tab.Panel>
     );

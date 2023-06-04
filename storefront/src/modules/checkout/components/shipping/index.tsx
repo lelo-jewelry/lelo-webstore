@@ -29,6 +29,8 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
     const {
         control,
         setError,
+        getValues,
+        setValue,
         formState: { errors }
     } = useForm<ShippingFormProps>({
         defaultValues: {
@@ -58,11 +60,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                 onError: () =>
                     setError(
                         'soId',
-                        {
-                            type: 'validate',
-                            message:
-                                'An error occurred while adding shipping. Please try again.'
-                        },
+                        { type: 'validate', message: 'An error occurred while adding shipping. Please try again.' },
                         { shouldFocus: true }
                     )
             }
@@ -77,7 +75,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
     // Memoized shipping method options
     const shippingMethods: ShippingOption[] = useMemo(() => {
         if (shipping_options && cart?.region) {
-            return shipping_options?.map((option) => ({
+            const methods = shipping_options.map((option) => ({
                 value: option.id,
                 label: option.name,
                 price: formatAmount({
@@ -85,6 +83,14 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                     region: cart.region
                 })
             }));
+
+            const value = getValues('soId');
+
+            if (!value && methods.length > 0) {
+                setValue('soId', methods[0].value!);
+            }
+
+            return methods;
         }
 
         return [];
@@ -104,71 +110,50 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                 </div>
             }
         >
-            <Controller
-                name="soId"
-                control={control}
-                render={({ field: { value, onChange } }) => {
-                    return (
-                        <div>
-                            <RadioGroup
-                                value={value}
-                                onChange={(value: string) =>
-                                    handleChange(value, onChange)
-                                }
-                            >
-                                {shippingMethods && shippingMethods.length ? (
-                                    shippingMethods.map((option) => {
-                                        return (
-                                            <RadioGroup.Option
-                                                key={option.value}
-                                                value={option.value}
-                                                className={clsx(
-                                                    'flex items-center justify-between text-small-regular cursor-pointer py-4 border-b border-gray-200 last:border-b-0 px-8',
-                                                    {
-                                                        'bg-gray-50':
-                                                            option.value ===
-                                                            value
-                                                    }
-                                                )}
-                                            >
-                                                <div className="flex items-center gap-x-4">
-                                                    <Radio
-                                                        checked={
-                                                            value ===
-                                                            option.value
-                                                        }
-                                                    />
-                                                    <span className="text-base-regular">
-                                                        {option.label}
-                                                    </span>
-                                                </div>
-                                                <span className="justify-self-end text-gray-700">
-                                                    {option.price}
-                                                </span>
-                                            </RadioGroup.Option>
-                                        );
-                                    })
-                                ) : (
-                                    <div className="flex flex-col items-center justify-center px-4 py-8 text-gray-900">
-                                        <Spinner />
-                                    </div>
-                                )}
-                            </RadioGroup>
-                            <ErrorMessage
-                                errors={errors}
-                                name="soId"
-                                render={({ message }) => {
+            <Controller name="soId" control={control} render={({ field: { value, onChange } }) => {
+                return (
+                    <div>
+                        <RadioGroup value={value} onChange={(value: string) => handleChange(value, onChange)}>
+                            {shippingMethods && shippingMethods.length ? (
+                                shippingMethods.map((option) => {
                                     return (
-                                        <div className="pt-2 text-rose-500 text-small-regular">
-                                            <span>{message}</span>
-                                        </div>
+                                        <RadioGroup.Option
+                                            key={option.value}
+                                            value={option.value}
+                                            className={clsx(
+                                                'flex items-center justify-between text-small-regular cursor-pointer py-4 border-b border-gray-200 last:border-b-0 px-8',
+                                                { 'bg-gray-50': option.value === value }
+                                            )}
+                                        >
+                                            <div className="flex items-center gap-x-4">
+                                                <Radio checked={value === option.value} />
+                                                <span className="text-base-regular">
+                                                    {option.label}
+                                                </span>
+                                            </div>
+                                            <span className="justify-self-end text-gray-700">
+                                                {option.price}
+                                            </span>
+                                        </RadioGroup.Option>
                                     );
-                                }}
-                            />
-                        </div>
-                    );
-                }}
-            />
+                                })
+                            ) : (
+                                <div className="flex flex-col items-center justify-center px-4 py-8 text-gray-900">
+                                    <Spinner />
+                                </div>
+                            )}
+                        </RadioGroup>
+                        <ErrorMessage errors={errors} name="soId" render={({ message }) => {
+                            return (
+                                <div className="pt-2 text-rose-500 text-small-regular">
+                                    <span>{message}</span>
+                                </div>
+                            );
+                        }}
+                        />
+                    </div>
+                );
+            }} />
         </StepContainer>
     );
 };

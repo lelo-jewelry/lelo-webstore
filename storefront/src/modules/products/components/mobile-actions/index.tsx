@@ -16,8 +16,7 @@ type MobileActionsProps = {
 };
 
 const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
-    const { variant, addToCart, options, inStock, updateOptions } =
-        useProductActions();
+    const { variant, addToCart, options, inStock, updateOptions } = useProductActions();
     const { state, open, close } = useToggleState();
 
     const price = useProductPrice({ id: product.id!, variantId: variant?.id });

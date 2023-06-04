@@ -1,22 +1,9 @@
 import { medusaClient } from '@lib/config';
 import useToggleState, { StateType } from '@lib/hooks/use-toggle-state';
-import {
-    Address,
-    Cart,
-    Customer,
-    StorePostCartsCartReq
-} from '@medusajs/medusa';
+import { Address, Cart, Customer, StorePostCartsCartReq } from '@medusajs/medusa';
 import Wrapper from '@modules/checkout/components/payment-wrapper';
 import { isEqual } from 'lodash';
-import {
-    formatAmount,
-    useCart,
-    useCartShippingOptions,
-    useMeCustomer,
-    useRegions,
-    useSetPaymentSession,
-    useUpdateCart
-} from 'medusa-react';
+import { formatAmount, useCart, useCartShippingOptions, useMeCustomer, useRegions, useSetPaymentSession, useUpdateCart } from 'medusa-react';
 import { useRouter } from 'next/router';
 import React, { createContext, useContext, useEffect, useMemo } from 'react';
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';

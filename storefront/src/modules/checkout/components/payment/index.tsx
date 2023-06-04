@@ -39,30 +39,21 @@ const Payment = () => {
             index={isSame ? 3 : 4}
             closedState={
                 <div className="px-8 pb-8 text-small-regular">
-                    <p>Enter your address to see available payment options.</p>
+                    <p>Choose a delivery option to see available payment options.</p>
                 </div>
             }
         >
             <div>
-                {cart?.payment_sessions?.length ? (
+                {cart?.payment_sessions?.length && cart?.shipping_methods?.length > 0 ? (
                     cart.payment_sessions
-                        .sort((a, b) => {
-                            return a.provider_id > b.provider_id ? 1 : -1;
-                        })
+                        .sort((a, b) => a.provider_id > b.provider_id ? 1 : -1)
                         .map((paymentSession) => {
                             return (
                                 <PaymentContainer
                                     paymentSession={paymentSession}
                                     key={paymentSession.id}
-                                    selected={
-                                        cart?.payment_session?.provider_id ===
-                                        paymentSession.provider_id
-                                    }
-                                    setSelected={() =>
-                                        setPaymentSession(
-                                            paymentSession.provider_id
-                                        )
-                                    }
+                                    selected={cart?.payment_session?.provider_id === paymentSession.provider_id}
+                                    setSelected={() => setPaymentSession(paymentSession.provider_id)}
                                 />
                             );
                         })

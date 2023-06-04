@@ -74,10 +74,7 @@ const InfiniteProducts = ({ params }: InfiniteProductsType) => {
                         </li>
                     ))}
             </ul>
-            <div
-                className="py-16 flex justify-center items-center text-small-regular text-gray-700"
-                ref={ref}
-            >
+            <div className="py-16 flex justify-center items-center text-small-regular text-gray-700" ref={ref}>
                 <span ref={ref}></span>
             </div>
         </div>

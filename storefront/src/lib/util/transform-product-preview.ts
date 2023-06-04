@@ -27,6 +27,7 @@ const transformProductPreview = (
         title: product.title!,
         handle: product.handle!,
         thumbnail: product.thumbnail!,
+        hasInventory: product.variants.some(v => v.inventory_quantity && v.inventory_quantity > 0),
         price: cheapestVariant
             ? {
                 calculated_price: formatAmount({

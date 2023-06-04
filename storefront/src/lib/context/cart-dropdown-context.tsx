@@ -12,11 +12,7 @@ export const CartDropdownContext = createContext<CartDropdownContext | null>(
     null
 );
 
-export const CartDropdownProvider = ({
-    children
-}: {
-    children: React.ReactNode;
-}) => {
+export const CartDropdownProvider = ({ children }: { children: React.ReactNode; }) => {
     const { state, close, open } = useToggleState();
     const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
         undefined
@@ -48,9 +44,7 @@ export const CartDropdownProvider = ({
     }, [activeTimer]);
 
     return (
-        <CartDropdownContext.Provider
-            value={{ state, close, open: openAndCancel, timedOpen }}
-        >
+        <CartDropdownContext.Provider value={{ state, close, open: openAndCancel, timedOpen }}>
             {children}
         </CartDropdownContext.Provider>
     );

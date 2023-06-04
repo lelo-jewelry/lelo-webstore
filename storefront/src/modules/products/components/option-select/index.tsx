@@ -26,12 +26,10 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-2">
                 {filteredOptions.map((v) => {
                     return (
-                        <button
-                            onClick={() => updateOption({ [option.id]: v })}
-                            key={v}
+                        <button key={v} onClick={() => updateOption({ [option.id]: v })}
                             className={clsx(
                                 'border-gray-200 border text-xsmall-regular h-[50px] transition-all duration-200',
-                                { 'border-gray-900': v === current }
+                                { 'border-yellow-400': v === current }
                             )}
                         >
                             {v}

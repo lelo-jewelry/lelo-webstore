@@ -39,7 +39,7 @@ const ProductActions: React.FC<ProductActionsProps> = ({ product }) => {
 
             <p className="text-base-regular">{product.description}</p>
 
-            {product.variants.length > 1 && (
+            {product.variants.length > 0 && (
                 <div className="my-8 flex flex-col gap-y-6">
                     {(product.options || []).map((option) => {
                         return (

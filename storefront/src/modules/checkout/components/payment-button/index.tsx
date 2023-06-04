@@ -5,7 +5,6 @@ import Spinner from '@modules/common/icons/spinner';
 import { OnApproveActions, OnApproveData } from '@paypal/paypal-js';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { useElements, useStripe } from '@stripe/react-stripe-js';
-import { useCart } from 'medusa-react';
 import React, { useEffect, useState } from 'react';
 
 type PaymentButtonProps = {
@@ -14,7 +13,7 @@ type PaymentButtonProps = {
 
 const PaymentButton: React.FC<PaymentButtonProps> = ({ paymentSession }) => {
     const [notReady, setNotReady] = useState(true);
-    const { cart } = useCart();
+    const { cart } = useCheckout();
 
     useEffect(() => {
         setNotReady(true);
@@ -44,40 +43,27 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ paymentSession }) => {
 
     switch (paymentSession?.provider_id) {
         case 'stripe':
-            return (
-                <StripePaymentButton
-                    session={paymentSession}
-                    notReady={notReady}
-                />
-            );
+            return (<StripePaymentButton notReady={notReady} session={paymentSession} />);
         case 'manual':
-            return <ManualTestPaymentButton notReady={notReady} />;
+            return (<ManualTestPaymentButton notReady={notReady} />);
         case 'paypal':
-            return (
-                <PayPalPaymentButton
-                    notReady={notReady}
-                    session={paymentSession}
-                />
-            );
+            return (<PayPalPaymentButton notReady={notReady} session={paymentSession} />);
         default:
-            return <Button disabled>Select a payment method</Button>;
+            return (<Button disabled>Select a payment method</Button>);
     }
 };
 
-const StripePaymentButton = ({
-    session,
-    notReady
-}: {
-    session: PaymentSession;
+interface VendorPaymentButtonProps {
     notReady: boolean;
-}) => {
+    session: PaymentSession;
+}
+
+const StripePaymentButton = ({ session, notReady }: VendorPaymentButtonProps) => {
     const [disabled, setDisabled] = useState(false);
     const [submitting, setSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState<string | undefined>(
-        undefined
-    );
+    const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
-    const { cart } = useCart();
+    const { cart } = useCheckout();
     const { onPaymentCompleted } = useCheckout();
 
     const stripe = useStripe();
@@ -94,6 +80,7 @@ const StripePaymentButton = ({
 
     const handlePayment = async () => {
         setSubmitting(true);
+        setErrorMessage(undefined);
 
         if (!stripe || !elements || !card || !cart) {
             setSubmitting(false);
@@ -156,16 +143,11 @@ const StripePaymentButton = ({
 
     return (
         <>
-            <Button
-                disabled={submitting || disabled || notReady}
-                onClick={handlePayment}
-            >
+            <Button disabled={submitting || disabled || notReady} onClick={handlePayment}>
                 {submitting ? <Spinner /> : 'Checkout'}
             </Button>
             {errorMessage && (
-                <div className="text-red-500 text-small-regular mt-2">
-                    {errorMessage}
-                </div>
+                <div className="text-center text-red-500 mt-2">{errorMessage}</div>
             )}
         </>
     );
@@ -173,19 +155,11 @@ const StripePaymentButton = ({
 
 const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || '';
 
-const PayPalPaymentButton = ({
-    session,
-    notReady
-}: {
-    session: PaymentSession;
-    notReady: boolean;
-}) => {
+const PayPalPaymentButton = ({ session, notReady }: VendorPaymentButtonProps) => {
     const [submitting, setSubmitting] = useState(false);
-    const [errorMessage, setErrorMessage] = useState<string | undefined>(
-        undefined
-    );
+    const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
-    const { cart } = useCart();
+    const { cart } = useCheckout();
     const { onPaymentCompleted } = useCheckout();
 
     const handlePayment = async (
@@ -196,9 +170,7 @@ const PayPalPaymentButton = ({
             ?.authorize()
             .then((authorization) => {
                 if (authorization.status !== 'COMPLETED') {
-                    setErrorMessage(
-                        `An error occurred, status: ${authorization.status}`
-                    );
+                    setErrorMessage(`An error occurred, status: ${authorization.status}`);
                     return;
                 }
                 onPaymentCompleted();

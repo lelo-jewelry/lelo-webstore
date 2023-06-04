@@ -9,10 +9,7 @@ type UsePreviewProps<T> = {
     region?: Region;
 };
 
-const usePreviews = <T extends InfiniteProductPage>({
-    pages,
-    region
-}: UsePreviewProps<T>) => {
+const usePreviews = <T extends InfiniteProductPage>({ pages, region }: UsePreviewProps<T>) => {
     const previews: ProductPreviewType[] = useMemo(() => {
         if (!pages || !region) {
             return [];

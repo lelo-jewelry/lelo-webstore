@@ -7,6 +7,7 @@ type StepContainerProps = {
     title: string;
     closedState?: React.ReactNode;
     children?: React.ReactNode;
+    forceClosed?: boolean;
 } & React.HTMLAttributes<HTMLDivElement>;
 
 const StepContainer = ({
@@ -14,6 +15,7 @@ const StepContainer = ({
     title,
     className,
     closedState,
+    forceClosed = undefined,
     children,
     ...props
 }: StepContainerProps) => {
@@ -24,7 +26,7 @@ const StepContainer = ({
         <div>
             <div
                 className={clsx('bg-white', className, {
-                    'opacity-50 pointer-events-none select-none': state
+                    'opacity-50 pointer-events-none select-none': (forceClosed === undefined ? state : forceClosed)
                 })}
                 {...props}
             >
@@ -32,7 +34,7 @@ const StepContainer = ({
                     <div className="bg-gray-900 w-8 h-8 rounded-full text-white flex justify-center items-center text-sm">
                         {index}
                     </div>
-                    <h2>{title}</h2>
+                    <h2>{title}:{state}</h2>
                 </div>
                 <Disclosure>
                     <Disclosure.Panel
@@ -40,8 +42,8 @@ const StepContainer = ({
                         className={clsx(
                             'transition-[max-height,opacity] duration-700 ease-in-out overflow-hidden',
                             {
-                                'max-h-[9999px] opacity-100': !state,
-                                'max-h-0 opacity-0': state
+                                'max-h-[9999px] opacity-100': !(forceClosed === undefined ? state : forceClosed),
+                                'max-h-0 opacity-0': (forceClosed === undefined ? state : forceClosed)
                             }
                         )}
                     >
@@ -52,8 +54,8 @@ const StepContainer = ({
                         className={clsx(
                             'transition-[max-height,opacity] duration-700 ease-in-out overflow-hidden',
                             {
-                                'max-h-[9999px] opacity-100': state,
-                                'max-h-0 opacity-0': !state
+                                'max-h-[9999px] opacity-100': (forceClosed === undefined ? state : forceClosed),
+                                'max-h-0 opacity-0': !(forceClosed === undefined ? state : forceClosed)
                             }
                         )}
                     >
