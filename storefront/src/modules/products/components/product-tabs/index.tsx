@@ -117,7 +117,7 @@ const ShippingInfoTab = () => {
                     <div>
                         <span className="font-semibold">Simple exchanges</span>
                         <p className="max-w-sm">
-                            Doesn't look quite like you expected? No worries - we give you
+                            Doesn&apos;t look quite like you expected? No worries - we give you
                             30 worry-free days to make sure you chose the right look for you.
                         </p>
                     </div>

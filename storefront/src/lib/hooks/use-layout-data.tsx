@@ -77,6 +77,7 @@ const fetchFeaturedProducts = async (
                 title: p.title!,
                 handle: p.handle!,
                 thumbnail: p.thumbnail!,
+                hasInventory: variants.some(v => v.inventory_quantity && v.inventory_quantity > 0),
                 price: cheapestVariant
                     ? {
                         calculated_price: formatAmount({

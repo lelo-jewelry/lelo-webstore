@@ -94,6 +94,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
         }
 
         return [];
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [shipping_options, cart]);
 
     const {
