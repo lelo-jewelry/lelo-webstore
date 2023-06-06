@@ -1,6 +1,7 @@
 # lelo-webstore backend
 
-A [MedusaJs](https://medusajs.com/) based backend for [lelo](https://lelo.jewelry).
+A [MedusaJs](https://medusajs.com/) based backend for [lelo](https://lelo.jewelry). \
+Includes a built-in [admin panel](https://lelo-backend-production.up.railway.app/adm) for managing the store.
 
 ## Local Development
 
@@ -22,6 +23,14 @@ A [MedusaJs](https://medusajs.com/) based backend for [lelo](https://lelo.jewelr
   cd backend
   medusa develop
   ```
+
+## Admin Panel
+
+The admin panel has a set of default credentials that can be used to login:
+```
+email: admin@medusa-test.com
+password: supersecret
+```
 
 ## Connecting to the existing database
 

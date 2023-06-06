@@ -2,9 +2,16 @@
 
 A monorepo for the entire ecommerce aspect of [lelo jewelry](https://lelo.jewelry). This repository contains the following projects:
 
-- [admin](./admin) - A React based admin panel for managing the store
 - [backend](./backend) - A Node.js based backend for the store that runs on [Medusa](https://medusajs.com/)
 - [storefront](./storefront) - A Next.js based storefront for clients to browse and purchase products
+- [admin](./backend/) - A React based admin panel for managing the store
+
+## Plugin integrations
+
+- [Stripe](https://docs.medusajs.com/plugins/payment/stripe)
+- [MeiliSearch](./search-provider/Readme.md)
+- [Minio](./file-data/Readme.md)
+- [Sendgrid](https://docs.medusajs.com/plugins/notifications/sendgrid)
 
 ## Local Development
 
