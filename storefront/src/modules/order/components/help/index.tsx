@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import React from 'react';
 
 const Help = () => {
@@ -8,14 +7,9 @@ const Help = () => {
             <div className="text-base-regular my-2">
                 <ul className="gap-y-2 flex flex-col">
                     <li>
-                        <Link href="/contact">
-                            <a>Contact</a>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/contact">
-                            <a>Returns & Exchanges</a>
-                        </Link>
+                        <a href="mailto:contact@lelo.jewelry?subject=A question about lelo&amp;body=">
+                            <span>Contact</span>
+                        </a>
                     </li>
                 </ul>
             </div>

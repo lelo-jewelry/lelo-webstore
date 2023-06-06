@@ -10,24 +10,15 @@ type OrderCompletedTemplateProps = {
     order: Order;
 };
 
-const OrderCompletedTemplate: React.FC<OrderCompletedTemplateProps> = ({
-    order
-}) => {
+const OrderCompletedTemplate: React.FC<OrderCompletedTemplateProps> = ({ order }) => {
     return (
         <div className="bg-gray-50 py-6 min-h-[calc(100vh-64px)]">
             <div className="content-container flex justify-center">
                 <div className="max-w-4xl h-full bg-white w-full">
                     <OrderDetails order={order} />
-                    <Items
-                        items={order.items}
-                        region={order.region}
-                        cartId={order.cart_id}
-                    />
+                    <Items items={order.items} region={order.region} cartId={order.cart_id} />
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-10 border-b border-gray-200">
-                        <ShippingDetails
-                            shippingMethods={order.shipping_methods}
-                            address={order.shipping_address}
-                        />
+                        <ShippingDetails shippingMethods={order.shipping_methods} address={order.shipping_address} />
                         <OrderSummary order={order} />
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 p-10">
