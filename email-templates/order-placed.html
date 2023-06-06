@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        .wrapper {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f8f8;
+            color: #80817f;
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .main {
+            background-color: #fff;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .px-1 {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .px-3 {
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+
+        .py-1 {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .py-2 {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .py-3 {
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        .text-end {
+            text-align: end;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        .text-sm {
+            font-size: 60%;
+        }
+
+        .text-md {
+            font-size: 80%;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+
+        .justify-content-center {
+            justify-content: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th {
+            font-weight: bold;
+            font-size: 110%;
+            border-width: 2px !important;
+        }
+
+        table td,
+        table th {
+            text-align: center;
+            padding: 0.5rem;
+            /* border: 1px solid #ddd; */
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .button {
+            background-color: #111827;
+            border: 0;
+            padding: 12px 40px 12px 40px;
+        }
+
+        .text-light {
+            color: #f8f8f8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <div class="px-1 text-end">
+                <a href="{{Weblink}}">
+                    <span style="font-size: 10px; color: #6f6860"><u>View this email in your browser.</u></span>
+                </a>
+            </div>
+            <div class="py-1 text-center">
+                <img width="60" alt="Lelo Logo" src="https://lelo-storefront-production.up.railway.app/email-content/lelo-text.png">
+            </div>
+
+            <div>
+                <a href="http://www.lelo.jewelry">
+                    <img class="max-width" width="100%" alt="Lelo Jewelry" src="https://lelo-storefront-production.up.railway.app/email-content/obrigado-graphic.jpg">
+                </a>
+                <div class="text-center">
+                    <span class="text-sm">(obrigado means thank you in Portuguese)</span>
+                </div>
+                <div class="py-3 text-center">
+                    <strong>THANK YOU FOR BEING A PART OF OUR STORY.</strong>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <div>Sales Receipt</div>
+                <div class="text-md">
+                    <span>{{ formatDate date "MMMM DD, YYYY h:mm:ss A" }}</span>
+                </div>
+            </div>
+
+            <div class="px-3 py-3">
+                <div>
+                    <div>
+                        <strong>Order Number:</strong>
+                        <span class="text-md">{{ id }}</span>
+                    </div>
+
+                    <div>
+                        <strong>Shipping To:</strong>
+                    </div>
+                    <div>
+                        <span class="text-md">{{ shipping_address.first_name }} {{ shipping_address.last_name }}</span>
+                    </div>
+                    <div>
+                        <span class="text-md">{{ shipping_address.address_1 }}</span>
+                    </div>
+                    {{#if shipping_address.address_2}}
+                    <div>
+                        <span class="text-md">{{ shipping_address.address_2 }}</span>
+                    </div>
+                    {{/if}}
+                    <div>
+                        <span class="text-md">{{ shipping_address.city }}</span>
+                        <span>,</span>
+                        <span class="text-md">{{ shipping_address.province }}</span>
+                        <span> </span>
+                        <span class="text-md">{{ shipping_address.postal_code }}</span>
+                    </div>
+                </div>
+
+                <div class="py-3 text-md">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ITEM</th>
+                                <th>QUANTITY</th>
+                                <th>PRICE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each items}}
+                            <tr>
+                                <td>{{id}}</td>
+                                <td>{{quantity}}</td>
+                                <td>{{price}}</td>
+                            </tr>
+                            {{/each}}
+                            <tr>
+                                <td colspan="2">TOTAL</td>
+                                <td>{{ total }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-center text-md">
+                    <strong>Missed something else you wanted? Have another look at our online collection!</strong>
+                    <div class="py-2">
+                        <a style="color: #f8f8f8;" class="button text-light" target="_blank" href="https://lelo.jewelry/store">Lelo Online</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="background-color: #80817f;" class="text-light px-3 py-3">
+                <div class="text-justify">
+                    <strong>
+                        Thank you for shopping at Lelo Jewelry.
+                        We hope you feel satisfied with our products, and if you
+                        have any questions or suggestions, please feel free to reach out to us! We
+                        are just an email away:
+                    </strong>
+                </div>
+                <br />
+                <div class="text-center">
+                    <a href="mailto:contact@lelo.jewelry?subject=A question about lelo&amp;body=">
+                        <span style="color: #ffffff; font-size: 12px">
+                            <strong>contact@lelo.jewelry</strong>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <div style="background-color:#fff1f2;" class="text-center text-md py-1">
+                <div class="Unsubscribe--addressLine"></div>
+                <p>
+                    <a style="color:#80817f;" class="Unsubscribe--unsubscribeLink zzzzzzz" target="_blank" href="{{{unsubscribe}}}">Unsubscribe</a>
+                    <span> | </span>
+                    <a style="color:#80817f;" class="Unsubscribe--unsubscribePreferences" target="_blank" href="{{{unsubscribe_preferences}}}">Subscription Preferences</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
