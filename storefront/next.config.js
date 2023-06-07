@@ -3,6 +3,7 @@ module.exports = {
     reactStrictMode: true,
     images: {
         domains: [
+            'lelo.jewelry',
             'lelo-file-data-production.up.railway.app',
             'localhost'
         ]
