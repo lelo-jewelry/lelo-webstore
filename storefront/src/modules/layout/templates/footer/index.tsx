@@ -1,13 +1,17 @@
 import FooterCTA from '@modules/layout/components/footer-cta';
 import FooterNav from '@modules/layout/components/footer-nav';
+import { NextRouter, withRouter } from 'next/router';
 
-const Footer = () => {
+const Footer = ({ router }: { router: NextRouter }) => {
+
+    const isCollectionsPage = router.pathname.includes('/store');
+
     return (
         <footer>
-            <FooterCTA />
+            {!isCollectionsPage && <FooterCTA />}
             <FooterNav />
         </footer>
     );
 };
 
-export default Footer;
+export default withRouter(Footer);
