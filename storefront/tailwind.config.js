@@ -6,6 +6,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            colors: {
+                dainty: '#ea7a7a'
+            },
             transitionProperty: {
                 width: 'width',
                 spacing: 'margin, padding'
