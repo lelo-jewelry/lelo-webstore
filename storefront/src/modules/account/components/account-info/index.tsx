@@ -32,6 +32,12 @@ const AccountInfo = ({
         setTimeout(() => toggle(), 100);
     };
 
+    function getSafeText(text?: string) {
+        return (!text)
+            ? ''
+            : (text == 'null') ? '' : text;
+    }
+
     useEffect(() => {
         if (isSuccess) {
             close();
@@ -44,11 +50,10 @@ const AccountInfo = ({
                 <div className="flex flex-col">
                     <span className="uppercase text-gray-700">{label}</span>
                     <div className="flex items-center flex-1 basis-0 justify-end gap-x-4">
-                        {typeof currentInfo === 'string' ? (
-                            <span className="font-semibold">{currentInfo}</span>
-                        ) : (
-                            currentInfo
-                        )}
+                        {typeof currentInfo === 'string'
+                            ? (<span className="font-semibold">{getSafeText(currentInfo)}</span>)
+                            : (currentInfo || '')
+                        }
                     </div>
                 </div>
                 <div>

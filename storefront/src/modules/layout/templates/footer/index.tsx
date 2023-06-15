@@ -4,7 +4,8 @@ import { NextRouter, withRouter } from 'next/router';
 
 const Footer = ({ router }: { router: NextRouter }) => {
 
-    const isCollectionsPage = router.pathname.includes('/store');
+    const ignorePages = ['/store', '/account'];
+    const isCollectionsPage = ignorePages.some(page => router.pathname.includes(page));
 
     return (
         <footer>
