@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 const Hero = () => {
     return (
-        <div className="h-[90vh] w-full relative">
-            <div className="text-white absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:text-left small:justify-end small:items-start small:p-32">
+        <div className="h-[100vh] small:h-[80vh] w-full relative">
+            <div className="text-white absolute inset-0 z-10 flex flex-col justify-end items-center text-center small:text-left small:p-32">
                 <div className="bg-black/5 p-3">
                     <h1 className="text-2xl-semi mb-4 drop-shadow-md shadow-black">
                         Authentic everyday jewelry crafted in Brazil
