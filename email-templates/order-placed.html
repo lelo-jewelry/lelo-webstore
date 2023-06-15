@@ -5,11 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 
     <style>
         .wrapper {
-            font-family: 'Poppins', sans-serif;
             background-color: #f8f8f8;
             color: #80817f;
             font-size: 14px;
@@ -142,7 +140,7 @@
             <div class="text-center">
                 <div>Sales Receipt</div>
                 <div class="text-md">
-                    <span>{{ formatDate date "MMMM DD, YYYY h:mm:ss A" }}</span>
+                    <span>{{ formatDate created_at "MMMM DD, YYYY h:mm:ss A" }}</span>
                 </div>
             </div>
 
