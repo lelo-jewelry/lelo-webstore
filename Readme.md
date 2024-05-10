@@ -1,5 +1,7 @@
 # lelo-webstore
 
+![lelo](https://github.com/lelo-jewelry/lelo-webstore/assets/3488482/20caaf3b-ba6f-46ff-b074-5f0955ed5f7f)
+
 A monorepo for the entire ecommerce aspect of [lelo jewelry](https://lelo.jewelry). This repository contains the following projects:
 
 - [backend](./backend) - A Node.js based backend for the store that runs on [Medusa](https://medusajs.com/)
